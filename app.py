@@ -2,13 +2,13 @@ from flask import Flask, abort, request
 from tempfile import NamedTemporaryFile
 import whisper
 import torch
-
+import re
 # Check if NVIDIA GPU is available
 torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
+MODEL = "base"
 # Load the Whisper model:
-model = whisper.load_model("base", device=DEVICE)
+model = whisper.load_model(MODEL, device=DEVICE)
 
 app = Flask(__name__)
 
@@ -22,10 +22,22 @@ def handler():
     if not request.files:
         # If the user didn't submit any files, return a 400 (Bad Request) error.
         abort(400)
+        
+    # Load a different model if provided
+    models = ["tiny", "base", "small", "medium", "large"]
+    request_model = request.form['model']
 
+    for model_name in models:
+        if model_name in request_model:
+            model = whisper.load_model(model_name, device=DEVICE)
+            break
+        
     # For each file, let's store the results in a list of dictionaries.
     results = []
 
+    # Load a different model
+    
+    
     # Loop over every file that the user submitted.
     for filename, handle in request.files.items():
         # Create a temporary file.
@@ -43,4 +55,4 @@ def handler():
         })
 
     # This will be automatically converted to JSON.
-    return {'results': results}
+    return {'results': results, 'model': model_name}
