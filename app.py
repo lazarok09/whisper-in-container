@@ -1,4 +1,4 @@
-from flask import Flask, abort, request
+from flask import Flask, abort, request, jsonify
 from tempfile import NamedTemporaryFile
 import whisper
 import torch
@@ -18,7 +18,7 @@ def hello():
 
 
 @app.route('/whisper', methods=['POST'])
-def handler():
+def whisper_handler():
     if not request.files:
         # If the user didn't submit any files, return a 400 (Bad Request) error.
         abort(400)
@@ -56,3 +56,20 @@ def handler():
 
     # This will be automatically converted to JSON.
     return {'results': results, 'model': model_name}
+
+
+@app.route('/generatemeta', methods=['POST'])
+def generate_meta_handler():
+            data = request.json 
+            if 'transcript' not in data or 'prompt' not in data:
+                abort(400)
+            
+            # TODO: use the GPT here to receive metadata
+            
+            # Perform your logic using the JSON data
+            transcript = data['transcript']
+            prompt = data['prompt']
+            response = {'message': 'success', 'transcript': transcript, 'prompt': prompt}
+            return jsonify(response)
+            
+
