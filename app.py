@@ -2,7 +2,9 @@ from flask import Flask, abort, request, jsonify
 from tempfile import NamedTemporaryFile
 import whisper
 import torch
-import re
+from whisper.utils import get_writer
+import base64
+
 # Check if NVIDIA GPU is available
 torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -10,7 +12,10 @@ MODEL = "base"
 # Load the Whisper model:
 model = whisper.load_model(MODEL, device=DEVICE)
 
+
 app = Flask(__name__)
+# Development mode 
+app.run(debug=True)
 
 @app.route("/")
 def hello():
@@ -21,16 +26,29 @@ def hello():
 def whisper_handler():
     if not request.files:
         # If the user didn't submit any files, return a 400 (Bad Request) error.
-        abort(400)
-        
-    # Load a different model if provided
+       return jsonify({
+            'error': 'Invalid request. You need to send a audio file',
+        }), 422
+    
+    # Get the model name from the form data
     models = ["tiny", "base", "small", "medium", "large"]
-    request_model = request.form['model']
+    request_model = request.form.get('model', '').lower()
 
+    # Check if the model name is empty or not in the available models
+    if not request_model or request_model not in models:
+        return jsonify({
+            'error': 'Invalid or no model name provided in the request.',
+            'available_models': models
+        }), 422
+
+    
+    # Load a different model if provided
     for model_name in models:
         if model_name in request_model:
             model = whisper.load_model(model_name, device=DEVICE)
             break
+
+
         
     # For each file, let's store the results in a list of dictionaries.
     results = []
@@ -53,23 +71,22 @@ def whisper_handler():
             'filename': filename,
             'transcript': result['text'],
         })
+        
+        
+        output_directory = "."
+        srt_writer = get_writer("srt", output_directory)
+        word_options = {
+        "highlight_words": True,
+        "max_line_count": 50,
+        "max_line_width": 3
+        }
+        srt_writer(result, temp.name, word_options)
+
+        # Convert SRT file to base64 and return
+        with open(temp.name, "rb") as file:
+            base64_content = base64.b64encode(file.read()).decode("utf-8")
+
+        return jsonify({'results': results, 'base64_content': base64_content})
 
     # This will be automatically converted to JSON.
     return {'results': results, 'model': model_name}
-
-
-@app.route('/generatemeta', methods=['POST'])
-def generate_meta_handler():
-            data = request.json 
-            if 'transcript' not in data or 'prompt' not in data:
-                abort(400)
-            
-            # TODO: use the GPT here to receive metadata
-            
-            # Perform your logic using the JSON data
-            transcript = data['transcript']
-            prompt = data['prompt']
-            response = {'message': 'success', 'transcript': transcript, 'prompt': prompt}
-            return jsonify(response)
-            
-
