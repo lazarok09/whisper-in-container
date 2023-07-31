@@ -4,7 +4,7 @@ import whisper
 import torch
 from whisper.utils import get_writer
 import base64
-
+import os
 # Check if NVIDIA GPU is available
 torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -72,18 +72,23 @@ def whisper_handler():
             'transcript': result['text'],
         })
         
+        # Subtitles
         
-        output_directory = "."
+        temp_srt_file = NamedTemporaryFile(prefix="whisper_", suffix=".srt", delete=False).name
+
+        # Write the .srt file using srt_writer
+        output_directory = os.path.dirname(temp_srt_file)
+        
         srt_writer = get_writer("srt", output_directory)
         word_options = {
         "highlight_words": True,
         "max_line_count": 50,
         "max_line_width": 3
         }
-        srt_writer(result, temp.name, word_options)
+        srt_writer(result, temp_srt_file, word_options)
 
         # Convert SRT file to base64 and return
-        with open(temp.name, "rb") as file:
+        with open(temp_srt_file, "rb") as file:
             base64_content = base64.b64encode(file.read()).decode("utf-8")
 
         return jsonify({'results': results, 'base64_content': base64_content})
