@@ -2,7 +2,7 @@ const formElement = document.getElementById("audio-form");
 const track = document.getElementById("track");
 const logsTextArea = document.getElementById("logs");
 const submitAudioButton = document.getElementById("submit");
-const BASE_URL = "http://backend:5000/whisper";
+const BASE_URL = "/whisper";
 
 formElement.addEventListener("submit", async (event) => {
   try {

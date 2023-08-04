@@ -1,5 +1,8 @@
-
-
+body {
+  font-family: BlinkMacSystemFont, -apple-system, segoe ui, roboto, oxygen,
+    ubuntu, cantarell, fira sans, droid sans, helvetica neue, helvetica, arial,
+    sans-serif;
+}
 .audio-form {
   display: flex;
   flex-direction: column;
@@ -7,11 +10,11 @@
   margin: 20px;
 }
 
-.audio-form input::-webkit-file-upload-button, .audio-form button {
+.audio-form input::-webkit-file-upload-button,
+.audio-form button {
   cursor: pointer;
-
 }
-.audio-form input::-webkit-file-upload-button{
+.audio-form input::-webkit-file-upload-button {
   padding: 5px 10px;
 }
 .audio-form button {
@@ -26,8 +29,6 @@
   margin: 20px;
 }
 
-
 #convertButton {
   padding: 10px 20px;
-  
 }
