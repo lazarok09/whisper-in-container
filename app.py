@@ -74,23 +74,26 @@ def whisper_handler():
         
         # Subtitles
         
-        temp_srt_file = NamedTemporaryFile(prefix="whisper_", suffix=".srt", delete=False).name
+         # Create a permanent VTT file
+        vtt_filename = os.path.splitext(filename)[0] + ".vtt"
+        vtt_file_path = os.path.join(".", vtt_filename)
+
+        # Write the .vtt file using srt_writer
+        srt_writer = get_writer("vtt", os.path.dirname(vtt_file_path))
 
         # Write the .srt file using srt_writer
-        output_directory = os.path.dirname(temp_srt_file)
-        
-        srt_writer = get_writer("srt", output_directory)
         word_options = {
         "highlight_words": True,
         "max_line_count": 50,
         "max_line_width": 3
         }
-        srt_writer(result, temp_srt_file, word_options)
+        srt_writer(result, vtt_file_path, word_options)
+        
 
         # Convert SRT file to base64 and return
-        with open(temp_srt_file, "rb") as file:
-            base64_content = base64.b64encode(file.read()).decode("utf-8")
-
+        with open(vtt_file_path, "r", encoding="utf-8") as file:
+            base64_content = base64.b64encode(file.read().encode("utf-8")).decode("utf-8")
+            
         return jsonify({'results': results, 'base64_content': base64_content})
 
     # This will be automatically converted to JSON.
