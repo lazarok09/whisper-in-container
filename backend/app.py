@@ -89,7 +89,6 @@ def whisper_handler():
         }
         srt_writer(result, vtt_file_path, word_options)
         
-
         # Convert SRT file to base64 and return
         with open(vtt_file_path, "r", encoding="utf-8") as file:
             base64_content = base64.b64encode(file.read().encode("utf-8")).decode("utf-8")

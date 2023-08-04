@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: frontend
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf 
+    networks:
+      - mynetwork
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

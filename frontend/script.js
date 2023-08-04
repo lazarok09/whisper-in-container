@@ -2,41 +2,39 @@ const formElement = document.getElementById("audio-form");
 const track = document.getElementById("track");
 const logsTextArea = document.getElementById("logs");
 const submitAudioButton = document.getElementById("submit");
-const BASE_URL = "http://localhost:5000/whisper";
+const BASE_URL = "http://backend:5000/whisper";
 
-async function sendFileToWhisper(form) {
+formElement.addEventListener("submit", async (event) => {
   try {
+    event.preventDefault();
+
+    const form = new FormData(event.target);
+    form.append("model", "base");
+
     const options = {
-      "Content-Type": "multipart/form-data",
-      body: form,
       method: "POST",
+      body: form,
     };
 
     submitAudioButton.disabled = true;
-
     submitAudioButton.innerHTML = "Carregando...";
 
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
+
     submitAudioButton.innerHTML = "Enviar";
     submitAudioButton.disabled = false;
 
     if (response.ok) {
-      logsTextArea.innerHTML = "Sucesso" + JSON.stringify(data, null, 2);
+      logsTextArea.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
     } else {
-      logsTextArea.innerHTML = "Erro" + JSON.stringify(data, 2, null);
+      logsTextArea.innerHTML = "Erro:\n" + JSON.stringify(data, null, 2);
     }
   } catch (e) {
-    console.error(e);
+    logsTextArea.innerHTML = "Erro: " + e;
   }
-}
-formElement.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = new FormData(event.target);
-  form.append("model", "base");
-  
-  sendFileToWhisper(form);
 });
+
 
 // Function to convert base64-encoded plain text to WebVTT format
 function convertBase64ToWebVTT(base64Text) {
