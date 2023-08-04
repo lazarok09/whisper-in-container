@@ -5,13 +5,7 @@ WORKDIR /python-docker
 COPY requirements.txt requirements.txt
 RUN apt-get update && apt-get install git -y
 RUN pip3 install -r requirements.txt
-
-# Clone the Whisper repository locally
-RUN git clone https://github.com/openai/whisper.git /python-docker/whisper
-
-# Install Whisper from the local directory
-RUN pip3 install -e /python-docker/whisper
-
+RUN pip3 install "git+https://github.com/openai/whisper.git" 
 RUN apt-get install -y ffmpeg
 
 COPY . .
