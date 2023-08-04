@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64 VTT</title>
+  <link rel="stylesheet" href="./styles.css"  />
+  
+</head>
+<body>
+  <div class="video">
+
+    <video id="video" crossorigin="anonymous" loop  controls>
+    <source src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4' type='video/mp4'>
+    <track id="track" src="" srclang="en" label="Nightmare" default />
+  </div>
+
+  <div >
+    <form id="audio-form" class="audio-form">
+      <h1>Upload the audio</h1>
+      <label for="audio">Audio or Video</label>
+      <input name="file" id="audio" type="file" />
+      <button id="submit" type="submit">Enviar</button>
+      <textarea id="logs" placeholder="Erros aparecerão aqui"></textarea>
+
+    </form>
+  </div>
+  <div class="convert-area">
+
+    <textarea id="base64Input" placeholder="Enter base64-encoded content..."></textarea>
+  
+    <button id="convertButton">Convert to WebVTT</button>
+  
+    <a id="downloadLink" style="display: none;">Download WebVTT</a>
+    
+  </div>
+  
+  <script src="script.js" ></script>
+
+</video>
+</body>
+</html>
