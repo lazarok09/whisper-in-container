@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.convert-area {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px;
+}
+
+.audio-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px;
+  gap: 12px;
+}
+.audio-form label {
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+}
+.audio-form button {
+  padding: 12px 24px;
+  background: rgb(130, 91, 223);
+  color: white;
+
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.audio-form input::-webkit-file-upload-button,
+.audio-form button {
+  cursor: pointer;
+}
+.audio-form input::-webkit-file-upload-button {
+  padding: 5px 10px;
+}
+.audio-form button {
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+.input {
+  padding: 20px 40px;
+}
+.button {
+  cursor: pointer;
+  padding: 12px 24px;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  color: white;
+  background: black;
+}
+#copyBase64Button {
+    cursor: copy;
+}
+
+#convertButton {
+  padding: 10px 20px;
+}
+
+.button:disabled, #copyBase64Button:disabled {
+    background: gray;
+    cursor: default;
+}
+.button-red {
+  background: red;
+}
+.copybase64-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.align-row-items {
+  display: flex;
+  gap: 12px;
+}
+
+.textarea {
+  width: 500px;
+  height: 250px;
+  margin-left: 20px;
+}

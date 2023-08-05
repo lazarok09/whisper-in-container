@@ -2,7 +2,16 @@ const formElement = document.getElementById("audio-form");
 const track = document.getElementById("track");
 const logsTextArea = document.getElementById("logs");
 const submitAudioButton = document.getElementById("submit");
+const base64Input = document.getElementById("base64Input");
+const copyBase64Button = document.getElementById("copyBase64Button");
+
+const converToVttButton = document.getElementById("convertButton");
+
 const BASE_URL = "/whisper";
+
+copyBase64Button.disabled = true;
+console.log("🚀 ~ file: script.js:13 ~ copyBase64Button:", copyBase64Button)
+converToVttButton.disabled = true;
 
 formElement.addEventListener("submit", async (event) => {
   try {
@@ -24,9 +33,12 @@ formElement.addEventListener("submit", async (event) => {
 
     submitAudioButton.innerHTML = "Enviar";
     submitAudioButton.disabled = false;
+    copyBase64Button.disabled = false;
+    converToVttButton.disabled = false;
 
     if (response.ok) {
       logsTextArea.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
+      base64Input.value = data.base64_content;
     } else {
       logsTextArea.innerHTML = "Erro:\n" + JSON.stringify(data, null, 2);
     }
@@ -34,7 +46,6 @@ formElement.addEventListener("submit", async (event) => {
     logsTextArea.innerHTML = "Erro: " + e;
   }
 });
-
 
 // Function to convert base64-encoded plain text to WebVTT format
 function convertBase64ToWebVTT(base64Text) {
@@ -54,13 +65,29 @@ function convertBase64ToWebVTT(base64Text) {
 
   return "WEBVTT\n\n" + vttLines.join("\n");
 }
-const base64PlainText =
-  "V0VCVlRUCgowMDowMC4wMDAgLS0+IDAwOjAyLjAwMApJIGtub3cuCgowMDowNC4wMDAgLS0+IDAwOjA1LjAwMApXaG8gdGhlIGhlbGwgaXMgdGhhdD8KCjAwOjMwLjAwMCAtLT4gMDA6MzIuMDAwClllYWguCgo=";
 
-const webVTTContent = convertBase64ToWebVTT(base64PlainText);
+copyBase64Button.addEventListener("click", () => {
+  var copyText = document.getElementById("base64Input");
 
-// Create a Blob containing the WebVTT content
-const blob = new Blob([webVTTContent], { type: "text/vtt" });
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
 
-// Set the src attribute of the track element to the URL of the Blob
-track.src = URL.createObjectURL(blob);
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+});
+
+converToVttButton.addEventListener("click", () => {
+  const input = document.getElementById("base64Input");
+  if (input.value?.length > 1) {
+    const base64PlainText = input;
+
+    const webVTTContent = convertBase64ToWebVTT(base64PlainText);
+
+    // Create a Blob containing the WebVTT content
+    const blob = new Blob([webVTTContent], { type: "text/vtt" });
+
+    // Set the src attribute of the track element to the URL of the Blob
+    track.src = URL.createObjectURL(blob);
+  }
+});
