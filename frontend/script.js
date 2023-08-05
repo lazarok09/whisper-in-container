@@ -17,7 +17,7 @@ formElement.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const form = new FormData(event.target);
-    form.append("model", "base");
+    form.append("model", form.get("models"));
 
     const options = {
       method: "POST",
@@ -79,7 +79,7 @@ converToVttButton.addEventListener("click", () => {
     const blobUrl = base64ToWebVTT(base64Input.value);
     // Create and tridownloadLinkgger download anchor
     downloadLink.style.display = "block";
-  
+
     downloadLink.href = blobUrl;
     downloadLink.download = fileName;
 

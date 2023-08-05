@@ -13,11 +13,9 @@
   <main class="main">
     <div class="video">
   
-      <video id="video" crossorigin="anonymous" loop  controls >
-
+      <video id="video" crossorigin="anonymous" loop  controls>
         <source src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4' type='video/mp4'>
         <track id="track"  srclang="en" label="Nightmare" default />
-
       </video>
     </div>
   
@@ -26,6 +24,27 @@
       <form id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
         <label for="audio">Upload audio or video</label>
         <input name="file" for="submit" required id="audio" type="file">
+
+        <label for="select-model" >Selecione um modelo</label>
+
+          <select name="models" id="select-model">
+              <option value="tiny">
+                Pequeno - 70 megas
+              </option>
+              <option value="base" selected>
+                Básico (Padrão) - 130 megas
+              </option>
+              <optio value="small">
+                Pequeno (Padrão) - 500 megas
+              </option>
+              <option value="medium">
+                Médio  2gb
+              </option>
+              <option value="large">
+                Grande 10gb
+              </option>
+          </select>
+
         <button id="submit" type="submit">Enviar</button>
       </form>
   
