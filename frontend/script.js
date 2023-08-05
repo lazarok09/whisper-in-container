@@ -10,7 +10,6 @@ const converToVttButton = document.getElementById("convertButton");
 const BASE_URL = "/whisper";
 
 copyBase64Button.disabled = true;
-console.log("🚀 ~ file: script.js:13 ~ copyBase64Button:", copyBase64Button)
 converToVttButton.disabled = true;
 
 formElement.addEventListener("submit", async (event) => {
@@ -47,27 +46,23 @@ formElement.addEventListener("submit", async (event) => {
   }
 });
 
-// Function to convert base64-encoded plain text to WebVTT format
-function convertBase64ToWebVTT(base64Text) {
-  // Decode base64 to plain text
-  const plainText = atob(base64Text);
-
-  const lines = plainText.trim().split("\n");
-  const vttLines = [];
-
-  for (let i = 0; i < lines.length; i++) {
-    const startTime = (i * 2).toFixed(1); // Time in seconds
-    const endTime = ((i + 1) * 2).toFixed(1); // Time in seconds
-
-    const vttLine = `${startTime} --> ${endTime}\n${lines[i]}\n`;
-    vttLines.push(vttLine);
+function base64ToWebVTT(base64Data) {
+  // Convert Base64 to Blob
+  const binaryData = atob(base64Data);
+  const arrayBuffer = new ArrayBuffer(binaryData.length);
+  const uint8Array = new Uint8Array(arrayBuffer);
+  for (let i = 0; i < binaryData.length; i++) {
+    uint8Array[i] = binaryData.charCodeAt(i);
   }
+  const blob = new Blob([arrayBuffer], { type: "text/vtt" });
 
-  return "WEBVTT\n\n" + vttLines.join("\n");
+  // Create Object URL
+  const blobUrl = URL.createObjectURL(blob);
+  return blobUrl;
 }
 
 copyBase64Button.addEventListener("click", () => {
-  var copyText = document.getElementById("base64Input");
+  var copyText = base64Input;
 
   // Select the text field
   copyText.select();
@@ -78,16 +73,17 @@ copyBase64Button.addEventListener("click", () => {
 });
 
 converToVttButton.addEventListener("click", () => {
-  const input = document.getElementById("base64Input");
-  if (input.value?.length > 1) {
-    const base64PlainText = input;
+  if (base64Input.value?.length > 1) {
+    const fileName = "subtitle.vtt";
+    const downloadLink = document.getElementById("downloadLink");
+    const blobUrl = base64ToWebVTT(base64Input.value);
+    // Create and tridownloadLinkgger download anchor
+    downloadLink.style.display = "block";
+  
+    downloadLink.href = blobUrl;
+    downloadLink.download = fileName;
 
-    const webVTTContent = convertBase64ToWebVTT(base64PlainText);
-
-    // Create a Blob containing the WebVTT content
-    const blob = new Blob([webVTTContent], { type: "text/vtt" });
-
-    // Set the src attribute of the track element to the URL of the Blob
-    track.src = URL.createObjectURL(blob);
+    // Set track subtitle with the blob generated
+    track.src = blobUrl;
   }
 });
