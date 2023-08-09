@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+/* https://coolors.co/080708-3772ff-8b4e9a-df2935-fdca40-e6e8e6 */
+:root {
+  --black: #080708;
+  --crayola: #3772ff;
+  --purpureus: #8b4e9a;
+  --poppy: #df2935;
+  --sunglow: #fdca40;
+  --platnum: #e6e8e6;
+}
+
 .main {
   display: flex;
   align-items: center;

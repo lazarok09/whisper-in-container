@@ -77,14 +77,9 @@ def whisper_handler():
          # Create a permanent VTT file
         vtt_filename = os.path.splitext(filename)[0] + ".vtt"
         vtt_file_path = os.path.join(".", vtt_filename)
-         # Create a permanent SRT file
-        srt_filename = os.path.splitext(filename)[0] + ".srt"
-        srt_file_path = os.path.join(".", srt_filename)
 
         # Write the .vtt file using srt_writer
         srt_writer = get_writer("vtt", os.path.dirname(vtt_file_path))
-        # Write the .vtt file using srt_writer
-        srt_writer = get_writer("srt", os.path.dirname(srt_file_path))
 
         # Write the .srt file using srt_writer
         word_options = {
@@ -94,22 +89,11 @@ def whisper_handler():
         }
         srt_writer(result, vtt_file_path, word_options)
         
-        # Convert VTT file to base64 and return
-        with open(vtt_file_path, "r", encoding="utf-8") as file:
-            subtitle_vtt_converted_into_base64 = base64.b64encode(file.read().encode("utf-8")).decode("utf-8")
-            results.append({
-            'filename': filename,
-            'transcript': result['text'],
-            'vtt':subtitle_vtt_converted_into_base64,
-            })
         # Convert SRT file to base64 and return
         with open(vtt_file_path, "r", encoding="utf-8") as file:
-            subtitle_srt_converted_into_base64 = base64.b64encode(file.read().encode("utf-8")).decode("utf-8")
-            results.append({
-            'filename': filename,
-            'transcript': result['text'],
-            'vtt':subtitle_vtt_converted_into_base64,
-            'srt': subtitle_srt_converted_into_base64,
-            })
+            base64_content = base64.b64encode(file.read().encode("utf-8")).decode("utf-8")
+            
+        return jsonify({'results': results, 'base64_content': base64_content})
+
     # This will be automatically converted to JSON.
     return {'results': results, 'model': model_name}

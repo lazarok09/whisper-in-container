@@ -43,7 +43,7 @@ formElement.addEventListener("submit", async (event) => {
       logsTextArea.innerHTML = "Erro:\n" + JSON.stringify(data, null, 2);
     }
   } catch (e) {
-    logsTextArea.innerHTML = "Erro: " + e;
+    logsTextArea.innerHTML = "Erro: " + e.message;
   }
 });
 
