@@ -9,7 +9,7 @@ services:
       - "80:80"
     volumes:
       - ./frontend:/usr/share/nginx/html
-      - ./nginx.conf:/etc/nginx/nginx.conf 
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf 
     networks:
       - mynetwork
     depends_on: 

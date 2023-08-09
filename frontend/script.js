@@ -6,6 +6,7 @@ const base64Input = document.getElementById("base64Input");
 const copyBase64Button = document.getElementById("copyBase64Button");
 
 const converToVttButton = document.getElementById("convertButton");
+const selectModel = document.getElementById("select-model");
 
 const BASE_URL = "/whisper";
 
@@ -85,5 +86,28 @@ converToVttButton.addEventListener("click", () => {
 
     // Set track subtitle with the blob generated
     track.src = blobUrl;
+  }
+});
+
+selectModel.addEventListener("change", (event) => {
+  switch (event.target.value) {
+    case "tiny":
+      alert(
+        "você selecionou o modelo minúsculo, que consome cerca de 1GB de VRAM"
+      );
+      break;
+    case "base":
+      alert(
+        "você selecionou o modelo padrão, que consome cerca de 1GB de VRAM"
+      );
+      break;
+    case "small":
+      alert(
+        "você selecionou o modelo pequeno, que consome cerca de 2GB de VRAM"
+      );
+      break;
+    case "medium":
+      alert("você selecionou o modelo médio, que consome cerca de 5GB de VRAM");
+      break;
   }
 });
