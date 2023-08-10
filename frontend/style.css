@@ -83,8 +83,10 @@ body {
   font-size: 16px;
   font-weight: 700;
   font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  margin-bottom: 42px;
 }
-.details #hidden-logs {
+
+.details p#hidden-logs {
   font-size: 14px;
 
   border-radius: 2px;
@@ -102,48 +104,17 @@ body {
   word-wrap: break-word;
 }
 
-.audio-form input::-webkit-file-upload-button,
-.audio-form button {
-  cursor: pointer;
-}
-.audio-form input::-webkit-file-upload-button {
-  padding: 5px 10px;
-}
-
-.invisible-link {
-  display: none;
-}
-.input {
-  padding: 20px 40px;
-}
-
-#convertButton {
-  padding: 10px 20px;
-}
-
-.button:disabled,
-#copyBase64Button:disabled {
-  background: gray;
-  cursor: default;
-}
-.button-red {
-  background: red;
-}
-.copybase64-area {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 12px 0;
-}
-
-.align-row-items {
-  display: flex;
-  gap: 12px;
-}
-
-.textarea {
-  max-width: 500px;
+.download-area {
   width: 100%;
-  height: 250px;
-  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.download-area .invisible-link {
+  display: flex;
+  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 24px;
+}
+.download-area .download-icon {
+  padding: 0 16px;
 }

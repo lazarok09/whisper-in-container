@@ -2,9 +2,6 @@ const formElement = document.getElementById("audio-form");
 const videoElement = document.getElementById("video");
 const videoElementTrack = document.getElementById("video-track");
 
-const audioElement = document.getElementById("uploaded-audio");
-const audioElementTrack = document.getElementById("uploaded-audio-track");
-
 const hiddenLogs = document.getElementById("hidden-logs");
 const submitAudioButton = document.getElementById("submit");
 
@@ -45,10 +42,11 @@ formElement.addEventListener("submit", async (event) => {
       hiddenLogs.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
       createDownloadSubtitleButton(data.base64_content);
       setVideoTrack(data.base64_content);
-      setAudioTrack(data.base64_content);
     }
   } catch (e) {
     hiddenLogs.innerHTML = "Erro: " + e.message;
+  }finally {
+    hiddenLogs.open = true;
   }
 });
 function base64ToWebVTT(base64Data) {
@@ -78,10 +76,6 @@ function createDownloadSubtitleButton(base64Content) {
 function setVideoTrack(base64Content) {
   // Set track subtitle with the blob generated
   videoElementTrack.src = generateBlobUrlForTrack(base64Content);
-}
-function setAudioTrack(base64Content) {
-  // Set track subtitle with the blob generated
-  audioElementTrack.src = generateBlobUrlForTrack(base64Content);
 }
 
 function generateBlobUrlForTrack(base64Content) {

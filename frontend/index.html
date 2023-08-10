@@ -1,82 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Base64 VTT</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base64 VTT</title>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-  <link href="./style.css" rel="stylesheet" type="text/css" />
+  <body>
+    <main class="main">
+      <div class="video-container">
+        <video id="video" crossorigin="anonymous" loop controls>
+          <source src="" type="video/mp4" />
+          <track id="video-track" srclang="en" label="Nightmare" default />
+        </video>
+      </div>
 
-</head>
+      <!-- Action buttons -->
+      <section aria-label="Upload the audio">
+        <form
+          name="generate-subtitle"
+          id="audio-form"
+          class="audio-form"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div
+            class="upload-audio button button-blue"
+            aria-labelledby="audio-label"
+          >
+            <label for="audio" id="audio-label">Enviar arquivo</label>
+            <input
+              name="file"
+              for="submit"
+              required
+              id="audio"
+              type="file"
+              accept="video/*, audio/*"
+              class="hide-input"
+            />
+          </div>
 
-<body>
-  <main class="main">
-    <div class="video-container">
+          <div>
+            <button id="submit" class="button button-yellow" type="submit">
+              Gerar legenda
+            </button>
+          </div>
 
-      <video id="video" crossorigin="anonymous" loop controls>
-        <source src='' type='video/mp4'>
-        <track id="video-track" srclang="en" label="Nightmare" default />
-      </video>
+          <div>
+            <select
+              required
+              name="models"
+              id="select-model"
+              title="selecione um modelo"
+            >
+              <option value="tiny">Minúsculo</option>
+              <option value="base" selected>Básico</option>
+              <option value="small">Pequeno</option>
+              <option value="medium">Médio</option>
+            </select>
+          </div>
 
-      <audio id="uploaded-audio" loop controls aria-label="audio enviado">
-        <source src="" type="audio/*">
-        <track id="uploaded-audio-track" srclang="en" label="Legendas" default />
-      </audio>
-    </div>
-    
-    <!-- Action buttons -->
-    <section aria-label="Upload the audio">
+          <div>
+            <button
+              type="button"
+              aria-label="Clique para carregar o vídeo de demonstração"
+              id="demo-button"
+              class="button button-red"
+            >
+              Video demo
+            </button>
+          </div>
+        </form>
+      </section>
 
-      <form name="generate-subtitle" id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
-        <div class="upload-audio button button-blue" aria-labelledby="audio-label">
-          <label for="audio" id="audio-label">Enviar arquivo</label>
-          <input name="file" for="submit" required id="audio" type="file" accept="video/*, audio/*" class="hide-input">
-        </div>
+      <!-- Download subtitle-->
+      <section class="download-area">
+        <a id="downloadLink" class="invisible-link"
+          >Baixar legenda
+          <span class="download-icon"><img src="./assets/download.svg" alt="icone de baixar" /></span
+        ></a>
+      </section>
 
-        <div>
-          <button id="submit" class="button button-yellow" type="submit">Gerar legenda</button>
-        </div>
-
-        <div>
-          <select required name="models" id="select-model" title="selecione um modelo">
-            <option value="tiny">
-              Minúsculo
-            </option>
-            <option value="base" selected>
-              Básico
-            </option>
-            <option value="small">
-              Pequeno
-            </option>
-            <option value="medium">
-              Médio
-            </option>
-          </select>
-        </div>
-
-        <div>
-          <button type="button" aria-label="Clique para carregar o vídeo de demonstração" id="demo-button"
-            class="button button-red">Video demo</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- Error and  Logs -->
-    <details id="details-container" class="details">
-      <summary class="details details-title">Mostrar logs</summary>
-      <p id="hidden-logs">Logs aparecerão aqui !</p>
-    </details>
-
-  
-    <!-- Download subtitle-->
-    <section class="convert-area">
-      <a id="downloadLink" class="invisible-link">Baixar legenda</a>      
-    </section>
-
-  </main>
-  <script src="./script.js"></script>
-
-</body>
-
+      <!-- Error and  Logs -->
+      <details id="details-container" class="details">
+        <summary class="details details-title">Mostrar logs</summary>
+        <p id="hidden-logs">Logs aparecerão aqui !</p>
+      </details>
+    </main>
+    <script src="./script.js"></script>
+  </body>
 </html>
