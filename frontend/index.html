@@ -19,7 +19,8 @@
         <track id="track" srclang="en" label="Nightmare" default />
       </video>
     </div>
-
+    
+    <!-- Action buttons -->
     <section aria-label="Upload the audio">
 
       <form name="generate-subtitle" id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
@@ -29,12 +30,11 @@
         </div>
 
         <div>
-
           <button id="submit" class="button button-yellow" type="submit">Gerar legenda</button>
         </div>
 
         <div>
-          <select name="models" id="select-model" title="selecione um modelo">
+          <select required name="models" id="select-model" title="selecione um modelo">
             <option value="tiny">
               Minúsculo
             </option>
@@ -57,24 +57,16 @@
       </form>
     </section>
 
-    <textarea id="logs" class="textarea" placeholder="Logs or errors will show up here!"></textarea>
+    <!-- Error and  Logs -->
+    <details id="details-container" class="details">
+      <summary class="details details-title">Mostrar logs</summary>
+      <p id="hidden-logs">Logs aparecerão aqui !</p>
+    </details>
 
+  
+    <!-- Download subtitle-->
     <section class="convert-area">
-
-      <!-- Clipboard-->
-      <div class="copybase64-area">
-        <input class="input" type="text" id="base64Input" placeholder="Enter base64-encoded content..."></input>
-
-        <div class="align-row-items">
-          <!-- Subtitles conversor-->
-          <button id="copyBase64Button" type="button" class="button">Copy Base64 text</button>
-
-          <!-- Subtitles conversor-->
-          <button id="convertButton" class="button button-red">Convert to WebVTT</button>
-          <a id="downloadLink" class="invisible-link">Baixar legenda</a>
-        </div>
-
-      </div>
+      <a id="downloadLink" class="invisible-link">Baixar legenda</a>      
     </section>
 
   </main>

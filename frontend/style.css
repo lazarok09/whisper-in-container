@@ -52,9 +52,13 @@ body {
   justify-content: center;
   align-items: center;
 }
+.upload-audio #audio {
+  width: 60px;
+}
 
 .hide-input {
-  display: none;
+  position: absolute;
+  text-indent: -9999px;
 }
 
 #select-model {
@@ -66,14 +70,6 @@ body {
   text-align: center;
 }
 
-.convert-area {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 20px;
-  background: transparent;
-}
-
 .audio-form {
   display: flex;
   flex-wrap: wrap;
@@ -83,6 +79,28 @@ body {
   margin-bottom: 32px;
 }
 
+.details .details-title {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.details #hidden-logs {
+  font-size: 14px;
+
+  border-radius: 2px;
+  padding: 16px;
+
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #ff0000; /* Red color for error messages */
+  background-color: #f5f5f5; /* Light gray background */
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  white-space: pre-wrap; /* Preserve line breaks */
+  word-wrap: break-word;
+}
 .audio-form label {
   font-size: 18px;
   font-family: "Times New Roman", Times, serif;
@@ -103,9 +121,7 @@ body {
   padding: 20px 40px;
 }
 
-#copyBase64Button {
-  cursor: copy;
-}
+
 
 #convertButton {
   padding: 10px 20px;

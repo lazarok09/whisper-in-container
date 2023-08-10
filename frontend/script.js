@@ -1,20 +1,19 @@
 const formElement = document.getElementById("audio-form");
 const video = document.getElementById("video");
 const track = document.getElementById("track");
-const logsTextArea = document.getElementById("logs");
+const hiddenLogs = document.getElementById("hidden-logs");
 const submitAudioButton = document.getElementById("submit");
-const base64Input = document.getElementById("base64Input");
-const copyBase64Button = document.getElementById("copyBase64Button");
+
 const audioInput = document.getElementById("audio");
 
 const converToVttButton = document.getElementById("convertButton");
 const selectModel = document.getElementById("select-model");
 const demoButton = document.getElementById("demo-button");
+const detailsContainer = document.getElementById("details-container");
 
 const DEMO_URL = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4";
 const BASE_URL = "/whisper";
 
-copyBase64Button.disabled = true;
 converToVttButton.disabled = true;
 
 formElement.addEventListener("submit", async (event) => {
@@ -37,21 +36,18 @@ formElement.addEventListener("submit", async (event) => {
 
     submitAudioButton.innerHTML = "Enviar";
     submitAudioButton.disabled = false;
-    copyBase64Button.disabled = false;
+
     converToVttButton.disabled = false;
 
     if (response.ok) {
-      logsTextArea.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
-      base64Input.value = data.base64_content;
-    } else {
-      logsTextArea.innerHTML = "Erro:\n" + JSON.stringify(data, null, 2);
+      hiddenLogs.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
+      // createDownloadSubtitleButton(data.base64_content);
     }
   } catch (e) {
-    logsTextArea.innerHTML = "Erro: " + e.message;
+    hiddenLogs.innerHTML = "Erro: " + e.message;
   }
 });
-
-function base64ToWebVTT(base64Data) {
+export function base64ToWebVTT(base64Data) {
   // Convert Base64 to Blob
   const binaryData = atob(base64Data);
   const arrayBuffer = new ArrayBuffer(binaryData.length);
@@ -66,32 +62,18 @@ function base64ToWebVTT(base64Data) {
   return blobUrl;
 }
 
-copyBase64Button.addEventListener("click", () => {
-  var copyText = base64Input;
+function createDownloadSubtitleButton(base64Subtitle) {
+  const fileName = "subtitle.vtt";
+  const downloadLink = document.getElementById("downloadLink");
+  const blobUrl = base64ToWebVTT(base64Subtitle);
+  // Create and tridownloadLinkgger download anchor
+  downloadLink.style.display = "block";
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-});
-
-converToVttButton.addEventListener("click", () => {
-  if (base64Input.value?.length > 1) {
-    const fileName = "subtitle.vtt";
-    const downloadLink = document.getElementById("downloadLink");
-    const blobUrl = base64ToWebVTT(base64Input.value);
-    // Create and tridownloadLinkgger download anchor
-    downloadLink.style.display = "block";
-
-    downloadLink.href = blobUrl;
-    downloadLink.download = fileName;
-
-    // Set track subtitle with the blob generated
-    track.src = blobUrl;
-  }
-});
+  downloadLink.href = blobUrl;
+  downloadLink.download = fileName;
+  // Set track subtitle with the blob generated
+  track.src = blobUrl;
+}
 
 selectModel.addEventListener("change", (event) => {
   switch (event.target.value) {
