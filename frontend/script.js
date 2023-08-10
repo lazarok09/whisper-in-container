@@ -1,13 +1,17 @@
 const formElement = document.getElementById("audio-form");
+const video = document.getElementById("video");
 const track = document.getElementById("track");
 const logsTextArea = document.getElementById("logs");
 const submitAudioButton = document.getElementById("submit");
 const base64Input = document.getElementById("base64Input");
 const copyBase64Button = document.getElementById("copyBase64Button");
+const audioInput = document.getElementById("audio");
 
 const converToVttButton = document.getElementById("convertButton");
 const selectModel = document.getElementById("select-model");
+const demoButton = document.getElementById("demo-button");
 
+const DEMO_URL = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4";
 const BASE_URL = "/whisper";
 
 copyBase64Button.disabled = true;
@@ -110,4 +114,15 @@ selectModel.addEventListener("change", (event) => {
       alert("você selecionou o modelo médio, que consome cerca de 5GB de VRAM");
       break;
   }
+});
+
+audioInput.addEventListener("change", (event) => {
+  if (event.target.files && event.target.files[0]) {
+    const label = document.getElementById("audio-label");
+    label.innerHTML = event.target.files[0].name ?? "Arquivo pronto";
+  }
+});
+
+demoButton.addEventListener("click", () => {
+  video.src = DEMO_URL;
 });

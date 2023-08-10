@@ -11,15 +11,59 @@
   --sunglow: #fdca40;
   --platnum: #e6e8e6;
 }
-
-.main {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+body {
+  background: var(--black);
+  color: white;
 }
-#video {
-  width: 450px;
+.main {
+  padding: 0;
+}
+.video-container {
+  width: 100%;
+  max-width: 751px;
+  background: transparent;
+}
+.video-container video {
+  width: 100%;
   aspect-ratio: 16/9;
+}
+
+.button {
+  height: 42px;
+  width: 137px;
+  color: white;
+  background: black;
+  cursor: pointer;
+  border: none;
+}
+
+.button.button-red {
+  background: var(--poppy);
+}
+.button.button-blue {
+  background: var(--crayola);
+}
+.button.button-yellow {
+  background: var(--sunglow);
+  font-weight: bold;
+}
+.upload-audio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide-input {
+  display: none;
+}
+
+#select-model {
+  background: var(--purpureus);
+  color: white;
+  font-weight: bold;
+  height: 42px;
+  width: 137px;
+  text-align: center;
 }
 
 .convert-area {
@@ -27,6 +71,7 @@
   flex-direction: column;
   width: 50%;
   margin: 20px;
+  background: transparent;
 }
 
 .audio-form {
@@ -35,18 +80,11 @@
   width: 50%;
   margin: 20px;
   gap: 12px;
+  background: transparent;
 }
 .audio-form label {
   font-size: 18px;
   font-family: "Times New Roman", Times, serif;
-}
-.audio-form button {
-  padding: 12px 24px;
-  background: rgb(130, 91, 223);
-  color: white;
-
-  border: none;
-  border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .audio-form input::-webkit-file-upload-button,
@@ -56,24 +94,14 @@
 .audio-form input::-webkit-file-upload-button {
   padding: 5px 10px;
 }
-.audio-form button {
-  padding: 5px 10px;
-  border-radius: 2px;
-}
+
 .invisible-link {
   display: none;
 }
 .input {
   padding: 20px 40px;
 }
-.button {
-  cursor: pointer;
-  padding: 12px 24px;
-  border: none;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  color: white;
-  background: black;
-}
+
 #copyBase64Button {
   cursor: copy;
 }
@@ -103,7 +131,8 @@
 }
 
 .textarea {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   height: 250px;
-  margin-left: 20px;
+  padding: 16px;
 }

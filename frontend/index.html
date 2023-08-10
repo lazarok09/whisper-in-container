@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Base64 VTT</title>
 
-  <link href="./style.css" rel="stylesheet" type="text/css"/>
+  <link href="./style.css" rel="stylesheet" type="text/css" />
 
-  
 </head>
+
 <body>
   <main class="main">
-    <div class="video">
-  
-      <video id="video" crossorigin="anonymous" loop  controls>
-        <source src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4' type='video/mp4'>
-        <track id="track"  srclang="en" label="Nightmare" default />
+    <div class="video-container">
+
+      <video id="video" crossorigin="anonymous" loop controls>
+        <source src='' type='video/mp4'>
+        <track id="track" srclang="en" label="Nightmare" default />
       </video>
     </div>
-  
-    <section>
-      <h1>Upload the audio</h1>
-      <form id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
-        <label for="audio">Upload audio or video</label>
-        <input name="file" for="submit" required id="audio" type="file">
 
-        <label for="select-model" >Selecione um modelo</label>
+    <section aria-label="Upload the audio">
 
-          <select name="models" id="select-model">
-              <option value="tiny">
-                Minúsculo - 39 megas
-              </option>
-              <option value="base" selected>
-                Básico (Padrão) - 130 megas
-              </option>
-              <option value="small">
-                Pequeno 244 megas
-              </option>
-              <option value="medium">
-                Médio  769 megas
-              </option>
+      <form name="generate-subtitle" id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
+        <div class="upload-audio button button-blue" aria-labelledby="audio-label">
+          <label for="audio" id="audio-label">Enviar arquivo</label>
+          <input name="file" for="submit" required id="audio" type="file" class="hide-input">
+        </div>
+
+        <div>
+
+          <button id="submit" class="button button-yellow" type="submit">Gerar legenda</button>
+        </div>
+
+        <div>
+          <select name="models" id="select-model" title="selecione um modelo">
+            <option value="tiny">
+              Minúsculo
+            </option>
+            <option value="base" selected>
+              Básico
+            </option>
+            <option value="small">
+              Pequeno
+            </option>
+            <option value="medium">
+              Médio
+            </option>
           </select>
+        </div>
 
-        <button id="submit" type="submit">Enviar</button>
+        <div>
+          <button type="button" aria-label="Clique para carregar o vídeo de demonstração" id="demo-button"
+            class="button button-red">Video demo</button>
+        </div>
       </form>
-  
-        <textarea id="logs" class="textarea" placeholder="Logs or errors will show up here!"></textarea>
-  
-        
-  
     </section>
 
+    <textarea id="logs" class="textarea" placeholder="Logs or errors will show up here!"></textarea>
+
     <section class="convert-area">
-      <h2>Convert Area</h2>
-      <!-- Output-->
-      
+
       <!-- Clipboard-->
       <div class="copybase64-area">
         <input class="input" type="text" id="base64Input" placeholder="Enter base64-encoded content..."></input>
@@ -64,15 +70,16 @@
           <button id="copyBase64Button" type="button" class="button">Copy Base64 text</button>
 
           <!-- Subtitles conversor-->
-          <button id="convertButton"  class="button button-red">Convert to WebVTT</button>
-          <a id="downloadLink" class="invisible-link">Download WebVTT</a>
+          <button id="convertButton" class="button button-red">Convert to WebVTT</button>
+          <a id="downloadLink" class="invisible-link">Baixar legenda</a>
         </div>
 
       </div>
     </section>
-    
+
   </main>
-  <script src="./script.js" ></script>
+  <script src="./script.js"></script>
 
 </body>
+
 </html>
