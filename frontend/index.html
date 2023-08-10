@@ -18,26 +18,26 @@
       </div>
 
       <!-- Action buttons -->
-      <section aria-label="Upload the audio">
+      <section aria-label="Área do envio de video">
         <form
           name="generate-subtitle"
-          id="audio-form"
-          class="audio-form"
+          id="upload-video-form"
+          class="upload-video-form"
           method="post"
           enctype="multipart/form-data"
         >
           <div
-            class="upload-audio button button-blue"
-            aria-labelledby="audio-label"
+            class="upload-video button button-blue"
+            aria-labelledby="upload-video-label"
           >
-            <label for="audio" id="audio-label">Enviar arquivo</label>
+            <label for="upload-video" id="upload-video-label">Enviar arquivo</label>
             <input
               name="file"
               for="submit"
               required
-              id="audio"
+              id="upload-video"
               type="file"
-              accept="video/*, audio/*"
+              accept="video/*"
               class="hide-input"
             />
           </div>

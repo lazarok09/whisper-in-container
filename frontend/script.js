@@ -1,15 +1,15 @@
-const formElement = document.getElementById("audio-form");
+const formElement = document.getElementById("upload-video-form");
 const videoElement = document.getElementById("video");
 const videoElementTrack = document.getElementById("video-track");
+
+const uploadVideoInput = document.getElementById("upload-video");
+const uploadVideoLabel = document.getElementById("upload-video-label");
+
+const submitAudioButton = document.getElementById("submit");
 
 const detailsContainer = document.getElementById("details-container");
 const hiddenLogs = document.getElementById("hidden-logs");
 
-const submitAudioButton = document.getElementById("submit");
-
-const audioInput = document.getElementById("audio");
-
-const converToVttButton = document.getElementById("convertButton");
 const selectModel = document.getElementById("select-model");
 const demoButton = document.getElementById("demo-button");
 
@@ -107,10 +107,9 @@ selectModel.addEventListener("change", (event) => {
   }
 });
 
-audioInput.addEventListener("change", (event) => {
+uploadVideoInput.addEventListener("change", (event) => {
   if (event.target.files && event.target.files[0]) {
-    const label = document.getElementById("audio-label");
-    label.innerHTML = event.target.files[0].name ?? "Arquivo pronto";
+    uploadVideoLabel.innerHTML = event.target.files[0].name ?? "Arquivo pronto";
     audioElement.src = URL.createObjectURL(event.target.files[0]);
   }
 });

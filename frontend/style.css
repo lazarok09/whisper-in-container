@@ -27,7 +27,7 @@ body {
   aspect-ratio: 16/9;
 }
 
-.audio-form {
+.upload-video-form {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
@@ -36,7 +36,7 @@ body {
   margin-bottom: 32px;
 }
 
-.audio-form .button {
+.upload-video-form .button {
   height: 42px;
   width: 137px;
   color: white;
@@ -45,32 +45,32 @@ body {
   border: none;
 }
 
-.audio-form .button.button-red {
+.upload-video-form .button.button-red {
   background: var(--poppy);
 }
-.audio-form .button.button-blue {
+.upload-video-form .button.button-blue {
   background: var(--crayola);
 }
-.audio-form .button.button-yellow {
+.upload-video-form .button.button-yellow {
   background: var(--sunglow);
   font-weight: bold;
 }
-.audio-form .upload-audio {
+.upload-video-form .upload-video {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.audio-form .upload-audio #audio {
+.upload-video-form .upload-video #audio {
   width: 200px;
 }
 
-.audio-form .hide-input {
+.upload-video-form .hide-input {
   position: absolute;
 
   text-indent: -9999px;
 }
 
-.audio-form #select-model {
+.upload-video-form #select-model {
   background: var(--purpureus);
   color: white;
   font-weight: bold;
@@ -135,17 +135,17 @@ body {
     margin: 0 auto;
     width: 751px;
   }
-  .audio-form {
+  .upload-video-form {
     justify-content: flex-start;
     gap: 35px;
   }
-  .audio-form .button,
-  .audio-form #select-model {
+  .upload-video-form .button,
+  .upload-video-form #select-model {
     width: 227px;
     height: 57px;
     font-size: 18px;
   }
-  .audio-form #select-model {
+  .upload-video-form #select-model {
     font-size: 18px;
   }
 }
