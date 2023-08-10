@@ -111,10 +111,17 @@ body {
 }
 
 .download-area .invisible-link {
-  display: flex;
+  display: none;
   font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 24px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
 }
+.download-area .invisible-link:hover {
+  color: red;
+}
+
 .download-area .download-icon {
   padding: 0 16px;
 }
