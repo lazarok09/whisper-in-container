@@ -2,7 +2,9 @@ const formElement = document.getElementById("audio-form");
 const videoElement = document.getElementById("video");
 const videoElementTrack = document.getElementById("video-track");
 
+const detailsContainer = document.getElementById("details-container");
 const hiddenLogs = document.getElementById("hidden-logs");
+
 const submitAudioButton = document.getElementById("submit");
 
 const audioInput = document.getElementById("audio");
@@ -10,7 +12,6 @@ const audioInput = document.getElementById("audio");
 const converToVttButton = document.getElementById("convertButton");
 const selectModel = document.getElementById("select-model");
 const demoButton = document.getElementById("demo-button");
-const detailsContainer = document.getElementById("details-container");
 
 const DEMO_URL = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/191332/tina.mp4";
 const BASE_URL = "/whisper";
@@ -45,7 +46,7 @@ formElement.addEventListener("submit", async (event) => {
     }
   } catch (e) {
     hiddenLogs.innerHTML = "Erro: " + e.message;
-  }finally {
+  } finally {
     hiddenLogs.open = true;
   }
 });
