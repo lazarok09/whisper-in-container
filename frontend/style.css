@@ -101,10 +101,6 @@ body {
   white-space: pre-wrap; /* Preserve line breaks */
   word-wrap: break-word;
 }
-.audio-form label {
-  font-size: 18px;
-  font-family: "Times New Roman", Times, serif;
-}
 
 .audio-form input::-webkit-file-upload-button,
 .audio-form button {
@@ -120,8 +116,6 @@ body {
 .input {
   padding: 20px 40px;
 }
-
-
 
 #convertButton {
   padding: 10px 20px;

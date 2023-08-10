@@ -16,8 +16,13 @@
 
       <video id="video" crossorigin="anonymous" loop controls>
         <source src='' type='video/mp4'>
-        <track id="track" srclang="en" label="Nightmare" default />
+        <track id="video-track" srclang="en" label="Nightmare" default />
       </video>
+
+      <audio id="uploaded-audio" loop controls aria-label="audio enviado">
+        <source src="" type="audio/*">
+        <track id="uploaded-audio-track" srclang="en" label="Legendas" default />
+      </audio>
     </div>
     
     <!-- Action buttons -->
@@ -26,7 +31,7 @@
       <form name="generate-subtitle" id="audio-form" class="audio-form" method="post" enctype="multipart/form-data">
         <div class="upload-audio button button-blue" aria-labelledby="audio-label">
           <label for="audio" id="audio-label">Enviar arquivo</label>
-          <input name="file" for="submit" required id="audio" type="file" class="hide-input">
+          <input name="file" for="submit" required id="audio" type="file" accept="video/*, audio/*" class="hide-input">
         </div>
 
         <div>
