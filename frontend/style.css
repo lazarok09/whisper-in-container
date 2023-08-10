@@ -14,10 +14,9 @@
 body {
   background: var(--black);
   color: white;
+  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
-.main {
-  padding: 0;
-}
+
 .video-container {
   width: 100%;
   max-width: 751px;
@@ -26,48 +25,6 @@ body {
 .video-container video {
   width: 100%;
   aspect-ratio: 16/9;
-}
-
-.button {
-  height: 42px;
-  width: 137px;
-  color: white;
-  background: black;
-  cursor: pointer;
-  border: none;
-}
-
-.button.button-red {
-  background: var(--poppy);
-}
-.button.button-blue {
-  background: var(--crayola);
-}
-.button.button-yellow {
-  background: var(--sunglow);
-  font-weight: bold;
-}
-.upload-audio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.upload-audio #audio {
-  width: 60px;
-}
-
-.hide-input {
-  position: absolute;
-  text-indent: -9999px;
-}
-
-#select-model {
-  background: var(--purpureus);
-  color: white;
-  font-weight: bold;
-  height: 42px;
-  width: 137px;
-  text-align: center;
 }
 
 .audio-form {
@@ -79,11 +36,60 @@ body {
   margin-bottom: 32px;
 }
 
+.audio-form .button {
+  height: 42px;
+  width: 137px;
+  color: white;
+  background: black;
+  cursor: pointer;
+  border: none;
+}
+
+.audio-form .button.button-red {
+  background: var(--poppy);
+}
+.audio-form .button.button-blue {
+  background: var(--crayola);
+}
+.audio-form .button.button-yellow {
+  background: var(--sunglow);
+  font-weight: bold;
+}
+.audio-form .upload-audio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.audio-form .upload-audio #audio {
+  width: 200px;
+}
+
+.audio-form .hide-input {
+  position: absolute;
+
+  text-indent: -9999px;
+}
+
+.audio-form #select-model {
+  background: var(--purpureus);
+  color: white;
+  font-weight: bold;
+  height: 42px;
+  width: 137px;
+  text-align: center;
+}
+
+.details-title:hover {
+  color: var(--sunglow);
+}
+.details-title {
+  cursor: pointer;
+}
+
 .details .details-title {
   font-size: 16px;
   font-weight: 700;
-  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  margin-bottom: 42px;
+  margin-bottom: 8px;
 }
 
 .details p#hidden-logs {
@@ -95,7 +101,7 @@ body {
   font-family: "Courier New", monospace;
   font-size: 14px;
   line-height: 1.4;
-  color: #ff0000; /* Red color for error messages */
+  color: var(--black); /* Red color for error messages */
   background-color: #f5f5f5; /* Light gray background */
   padding: 10px;
   border: 1px solid #cccccc;
@@ -112,7 +118,6 @@ body {
 
 .download-area .invisible-link {
   display: none;
-  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 24px;
   color: white;
   cursor: pointer;
@@ -124,4 +129,23 @@ body {
 
 .download-area .download-icon {
   padding: 0 16px;
+}
+@media (min-width: 1080px) {
+  .main {
+    margin: 0 auto;
+    width: 751px;
+  }
+  .audio-form {
+    justify-content: flex-start;
+    gap: 35px;
+  }
+  .audio-form .button,
+  .audio-form #select-model {
+    width: 227px;
+    height: 57px;
+    font-size: 18px;
+  }
+  .audio-form #select-model {
+    font-size: 18px;
+  }
 }
