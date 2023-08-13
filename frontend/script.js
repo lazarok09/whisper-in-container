@@ -35,9 +35,7 @@ formElement.addEventListener("submit", async (event) => {
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
 
-    submitAudioButton.innerHTML = "Enviar";
-    submitAudioButton.disabled = false;
-    selectModel.disabled = false;
+
 
     if (response.ok) {
       hiddenLogs.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
@@ -48,6 +46,9 @@ formElement.addEventListener("submit", async (event) => {
     hiddenLogs.innerHTML = "Erro: " + e.message;
   } finally {
     hiddenLogs.open = true;
+    submitAudioButton.innerHTML = "Enviar";
+    submitAudioButton.disabled = false;
+    selectModel.disabled = false;
   }
 });
 function base64ToWebVTT(base64Data) {
@@ -110,7 +111,7 @@ selectModel.addEventListener("change", (event) => {
 uploadVideoInput.addEventListener("change", (event) => {
   if (event.target.files && event.target.files[0]) {
     uploadVideoLabel.innerHTML = event.target.files[0].name ?? "Arquivo pronto";
-    audioElement.src = URL.createObjectURL(event.target.files[0]);
+    videoElement.src = URL.createObjectURL(event.target.files[0]);
   }
 });
 
