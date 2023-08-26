@@ -7,8 +7,9 @@ const uploadVideoLabel = document.getElementById("upload-video-label");
 
 const submitAudioButton = document.getElementById("submit");
 
-const detailsContainer = document.getElementById("details-container");
+
 const hiddenLogs = document.getElementById("hidden-logs");
+const detailsContainer = document.getElementById("details-container");
 
 const selectModel = document.getElementById("select-model");
 const demoButton = document.getElementById("demo-button");
@@ -45,7 +46,7 @@ formElement.addEventListener("submit", async (event) => {
   } catch (e) {
     hiddenLogs.innerHTML = "Erro: " + e.message;
   } finally {
-    hiddenLogs.open = true;
+    detailsContainer.open = true;
     submitAudioButton.innerHTML = "Enviar";
     submitAudioButton.disabled = false;
     selectModel.disabled = false;
@@ -104,6 +105,9 @@ selectModel.addEventListener("change", (event) => {
       break;
     case "medium":
       alert("você selecionou o modelo médio, que consome cerca de 5GB de VRAM");
+      break;
+    case "large":
+      alert("você selecionou o modelo grande, que consome cerca de 10GB de VRAM");
       break;
   }
 });
