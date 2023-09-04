@@ -35,7 +35,11 @@ body {
   background: transparent;
   margin-bottom: 32px;
 }
-
+.upload-video-form .upload-video #upload-video-label {
+  overflow: hidden;
+  text-indent: 6px;
+  word-break: keep-all;
+}
 .upload-video-form .button {
   height: 42px;
   width: 137px;
