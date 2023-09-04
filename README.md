@@ -5,13 +5,16 @@
 <p align="center">
   <a href="#about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#techs">Techs</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#execution">Execution</a>
+  <a href="#execution">Execution</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://www.figma.com/file/ln8FhPW5bmvUM660fxVv8S/Whisper?type=design&node-id=0%3A1&mode=design&t=j2BmZ03tOmCOG0hj-1">Design 🎨</a>
 </p>
 <br/>
 
 <div align="center"><img height=250 width=250 src="https://i.pinimg.com/originals/87/2a/57/872a57987284eb49af534b1cccb4ace3.gif" alt="animated gif" /></div>
 
 <hr/>
+
+
 
 <br/>
 
