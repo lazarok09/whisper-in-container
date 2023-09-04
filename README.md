@@ -19,16 +19,18 @@
 <br/>
 
 <h2 id="about">About</h2>
-In order to get my postgraduate degree i choosed a funny thing to do, get in a container a entire machine learning model. My final goal was to create a back-end and a front-end service to use the model. Get the transcript and generate subtitles. I could not be more happy with the results. It was a very succesfull project that made me grow and learn a lot about academic papers. I hope you enjoy💥
+In order to get my postgraduate degree i choosed a funny thing to do, get in a container a entire machine learning model. My final goal was to create a back-end and a front-end service to use the model. Get the transcript and generate subtitles. I could not be more happy with the results. It was a very succesfull project that made me grow and learn a lot about academic papers. I hope you enjoy 💥
+
+<br />
+
+<br />
+
+<br />
+
+<div align="center"><img src="https://i.imgur.com/LCAtS6O.png" alt="image containing a user interface to interact with whisper" /></div>
 
 
-```sh
-docker compose up
-```
-Go to localhost, in the port TCP 80. You should see a front-end app.
-
-
-
+<hr />
 
 <h2 id="techs"> Techs </h2>
 
@@ -56,6 +58,8 @@ The dev enviroment is in docker composed file, containing both front and backend
 ```
 docker compose up
 ```
+
+Go to localhost, in the port TCP 80. You should see a front-end app.
 
 <hr />
 <br/>
