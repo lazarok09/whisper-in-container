@@ -5,91 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Base64 VTT</title>
 
+    <link href="./fonts.css" rel="stylesheet" type="text/css" />
     <link href="./style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
     <main class="main">
-      <div class="video-container">
-        <video id="video" crossorigin="anonymous" loop controls>
-          <source src="" type="video/mp4" />
-          <track id="video-track" srclang="en" label="Nightmare" default />
-        </video>
+      <div class="main__group" id="maingroup">
+        <h1 class="main__title">
+          Start with the Whisper ML powered with Docker
+        </h1>
+        <img
+          src="./assets/twopeople.svg"
+          alt="duas pessoas andando"
+          height="350"
+          width="350"
+        />
+        <p class="main__description">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+          mollitia, assumenda ducimus doloribus sunt cupiditate temporibus nisi
+          doloremque deserunt dolorem expedita natus nulla reprehenderit sit?
+          Reiciendis temporibus ducimus est alias!
+        </p>
+        <button class="main__action-start" onclick="toggleWhisper()">
+          Começar
+        </button>
       </div>
 
-      <!-- Action buttons -->
-      <section aria-label="Área do envio de video">
-        <form
-          name="generate-subtitle"
-          id="upload-video-form"
-          class="upload-video-form"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <div
-            class="upload-video button button-blue"
-            aria-labelledby="upload-video-label"
+      <button
+        class="main__action-start hideblock"
+        id="voltar"
+        onclick="toggleWhisper()"
+      >
+        Voltar
+      </button>
+
+      <!-- Hided Whisper -->
+      <div id="showwhispercontainer" class="hideblock">
+        <div class="video-container">
+          <video id="video" crossorigin="anonymous" loop controls>
+            <source src="" type="video/mp4" />
+            <track id="video-track" srclang="en" label="Nightmare" default />
+          </video>
+        </div>
+
+        <!-- Action buttons -->
+        <section aria-label="Área do envio de video">
+          <form
+            name="generate-subtitle"
+            id="upload-video-form"
+            class="upload-video-form"
+            method="post"
+            enctype="multipart/form-data"
           >
-            <label for="upload-video" id="upload-video-label">Enviar arquivo</label>
-            <input
-              name="file"
-              for="submit"
-              required
-              id="upload-video"
-              type="file"
-              accept="video/*"
-              class="hide-input"
-            />
-          </div>
-
-          <div>
-            <button id="submit" class="button button-yellow" type="submit">
-              Gerar legenda
-            </button>
-          </div>
-
-          <div>
-            <button
-              type="button"
-              aria-label="Clique para carregar o vídeo de demonstração"
-              id="demo-button"
-              class="button button-red"
+            <div
+              class="upload-video button button-blue"
+              aria-labelledby="upload-video-label"
             >
-              Video demo
-            </button>
-          </div>
-          
-          <div>
-            <select
-              required
-              name="models"
-              id="select-model"
-              title="selecione um modelo"
-            >
-              <option value="tiny">Minúsculo</option>
-              <option value="base" selected>Básico</option>
-              <option value="small">Pequeno</option>
-              <option value="medium">Médio</option>
-              <option value="large">Grande</option>
-            </select>
-          </div>
-        </form>
-      </section>
+              <label for="upload-video" id="upload-video-label"
+                >Enviar arquivo</label
+              >
+              <input
+                name="file"
+                for="submit"
+                required
+                id="upload-video"
+                type="file"
+                accept="audio/*"
+                class="hide-input"
+              />
+            </div>
 
-      <!-- Download subtitle-->
-      <section class="download-area">
-        <a id="downloadLink" class="invisible-link"
-          >Baixar legenda
-          <span class="download-icon"
-            ><img src="./assets/download.svg" alt="icone de baixar" /></span
-        ></a>
-      </section>
+            <div>
+              <button id="submit" class="button button-yellow" type="submit">
+                Gerar legenda
+              </button>
+            </div>
 
-      <!-- Error and  Logs -->
-      <details id="details-container" class="details">
-        <summary class="details details-title">Mostrar logs</summary>
-        <p id="hidden-logs">Logs aparecerão aqui !</p>
-      </details>
+            <div>
+              <button
+                type="button"
+                aria-label="Clique para carregar o vídeo de demonstração"
+                id="demo-button"
+                class="button button-red"
+              >
+                Video demo
+              </button>
+            </div>
+
+            <div>
+              <select
+                required
+                name="models"
+                id="select-model"
+                title="selecione um modelo"
+              >
+                <option value="tiny">Minúsculo</option>
+                <option value="base" selected>Básico</option>
+                <option value="small">Pequeno</option>
+                <option value="medium">Médio</option>
+                <option value="large">Grande</option>
+              </select>
+            </div>
+          </form>
+        </section>
+
+        <!-- Download subtitle-->
+        <section class="download-area">
+          <a id="downloadLink" class="invisible-link"
+            >Baixar legenda
+            <span class="download-icon"
+              ><img src="./assets/download.svg" alt="icone de baixar" /></span
+          ></a>
+        </section>
+
+        <!-- Error and  Logs -->
+        <details id="details-container" class="details">
+          <summary class="details details-title">Mostrar logs</summary>
+          <p id="hidden-logs">Logs aparecerão aqui !</p>
+        </details>
+      </div>
     </main>
     <script src="./script.js"></script>
   </body>

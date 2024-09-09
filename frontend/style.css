@@ -12,9 +12,43 @@
   --platnum: #e6e8e6;
 }
 body {
-  background: var(--black);
+  background: var(--platnum);
   color: white;
-  font-family: "Hind", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+.main__title {
+  font-size: 24px;
+  font-family: Roboto, "sans-serif";
+  color: var(--black);
+}
+.main__description {
+  font-size: 16px;
+  color: var(--black);
+  display: flex;
+  align-self: flex-end;
+}
+.main__action-start {
+  background-color: var(--crayola);
+  border: none;
+  padding: 8px;
+  color: white;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 8rem;
+  cursor: pointer;
+}
+.main__group {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+
+  grid-gap: 1rem;
+}
+.showblock {
+  display: block;
+}
+.hideblock {
+  display: none;
 }
 
 .video-container {
@@ -135,6 +169,7 @@ body {
 .download-area .download-icon {
   padding: 0 16px;
 }
+
 @media (min-width: 1080px) {
   .main {
     margin: 0 auto;
@@ -152,5 +187,8 @@ body {
   }
   .upload-video-form #select-model {
     font-size: 18px;
+  }
+  .main__title {
+    font-size: 32px;
   }
 }

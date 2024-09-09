@@ -7,7 +7,6 @@ const uploadVideoLabel = document.getElementById("upload-video-label");
 
 const submitAudioButton = document.getElementById("submit");
 
-
 const hiddenLogs = document.getElementById("hidden-logs");
 const detailsContainer = document.getElementById("details-container");
 
@@ -35,8 +34,6 @@ formElement.addEventListener("submit", async (event) => {
 
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
-
-
 
     if (response.ok) {
       hiddenLogs.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
@@ -107,7 +104,9 @@ selectModel.addEventListener("change", (event) => {
       alert("você selecionou o modelo médio, que consome cerca de 5GB de VRAM");
       break;
     case "large":
-      alert("você selecionou o modelo grande, que consome cerca de 10GB de VRAM");
+      alert(
+        "você selecionou o modelo grande, que consome cerca de 10GB de VRAM"
+      );
       break;
   }
 });
@@ -122,3 +121,22 @@ uploadVideoInput.addEventListener("change", (event) => {
 demoButton.addEventListener("click", () => {
   videoElement.src = DEMO_URL;
 });
+
+function toggleWhisper() {
+  const el = document.getElementById("showwhispercontainer");
+  const backBtn = document.getElementById("voltar");
+  const mainGp = document.getElementById("maingroup");
+
+  if (el.classList.contains("hideblock")) {
+    el.classList.add("showblock");
+    mainGp.classList.add("hideblock");
+    backBtn.classList.remove("hideblock");
+    el.classList.remove("hideblock");
+  } else {
+    el.classList.remove("showblock");
+    backBtn.classList.add("hideblock");
+    mainGp.classList.remove("hideblock");
+
+    el.classList.add("hideblock");
+  }
+}
