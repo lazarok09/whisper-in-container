@@ -19,7 +19,6 @@ const BASE_URL = "/whisper";
 formElement.addEventListener("submit", async (event) => {
   try {
     event.preventDefault();
-
     const form = new FormData(event.target);
     form.append("model", form.get("models"));
 
@@ -50,17 +49,12 @@ formElement.addEventListener("submit", async (event) => {
   }
 });
 function base64ToWebVTT(base64Data) {
-  // Convert Base64 to Blob
-  const binaryData = atob(base64Data);
-  const arrayBuffer = new ArrayBuffer(binaryData.length);
-  const uint8Array = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < binaryData.length; i++) {
-    uint8Array[i] = binaryData.charCodeAt(i);
-  }
-  const blob = new Blob([arrayBuffer], { type: "text/vtt" });
+  const decodedText = atob(base64Data);
 
-  // Create Object URL
+  const blob = new Blob([decodedText], { type: "text/vtt" });
+
   const blobUrl = URL.createObjectURL(blob);
+
   return blobUrl;
 }
 

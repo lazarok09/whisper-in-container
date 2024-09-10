@@ -11,6 +11,7 @@
 
   <body>
     <main class="main">
+      <!-- Step 1 - Introduction to the app  -->
       <div class="main__group" id="maingroup">
         <h1 class="main__title">
           Start with the Whisper ML powered with Docker
@@ -40,7 +41,7 @@
         Voltar
       </button>
 
-      <!-- Hided Whisper -->
+      <!-- Step 2 Hided Whisper handler -->
       <div id="showwhispercontainer" class="hideblock">
         <div class="video-container">
           <video id="video" crossorigin="anonymous" loop controls>
@@ -49,7 +50,6 @@
           </video>
         </div>
 
-        <!-- Action buttons -->
         <section aria-label="Área do envio de video">
           <form
             name="generate-subtitle"
@@ -71,7 +71,7 @@
                 required
                 id="upload-video"
                 type="file"
-                accept="audio/*"
+                accept="audio/*, video/*"
                 class="hide-input"
               />
             </div>
@@ -112,8 +112,8 @@
 
         <!-- Download subtitle-->
         <section class="download-area">
-          <a id="downloadLink" class="invisible-link"
-            >Baixar legenda
+          <a id="downloadLink" class="invisible-link">
+            Baixar legenda
             <span class="download-icon"
               ><img src="./assets/download.svg" alt="icone de baixar" /></span
           ></a>
