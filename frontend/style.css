@@ -31,10 +31,11 @@ body {
 }
 
 .main__title {
-  font-size: 24px;
+  font-size: 20px;
   font-family: Roboto, "sans-serif";
   color: var(--black);
   text-align: center;
+  max-width: 350px;
 }
 
 .main__description {
@@ -43,6 +44,16 @@ body {
   display: flex;
   align-self: flex-end; /* Corrected: align-self instead of align */
   text-align: center;
+  max-width: 470px;
+}
+.main__image-container {
+  max-width: 300px;
+  max-height: 300px;
+}
+.main__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .main__action-start,
@@ -224,15 +235,20 @@ body {
   word-wrap: break-word;
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1024px) {
   .main {
     margin: 0 auto;
-    width: 751px;
   }
+
+  .main__title {
+    font-size: 1.5rem;
+  }
+
   .main__group {
     border-radius: 8px;
-    padding: 32px;
+    padding: 16px 32px;
   }
+
   .main__action-start,
   #voltar {
     /* Combined styles */
@@ -249,20 +265,6 @@ body {
     /* Combined styles */
     width: 227px;
     height: 57px;
-    font-size: 18px;
-  }
-
-  .main__title {
-    font-size: 32px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .main__group {
-    /* Styles already in .main__group, no need to repeat */
-  }
-  .main__action-start,
-  #voltar {
-    /* Styles already in .main__action-start, no need to repeat */
+    font-size: 1.125rem;
   }
 }

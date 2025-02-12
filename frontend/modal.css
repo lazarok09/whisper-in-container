@@ -81,7 +81,7 @@ dialog h2 {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1rem;
   margin-left: 10px; /* Space between buttons */
   cursor: pointer;
   border-radius: 5px;
@@ -100,7 +100,7 @@ dialog h2 {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1rem;
   margin-top: 20px;
   cursor: pointer;
   border-radius: 5px;

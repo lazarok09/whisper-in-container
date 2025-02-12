@@ -20,7 +20,6 @@ closeModalBtn.addEventListener("click", () => {
 
 confirmModalBtn.addEventListener("click", () => {
   // Handle confirmation logic here (e.g., form submission)
-  console.log("Modal confirmed!");
   modal.classList.add("closing");
   modal.addEventListener(
     "animationend",
