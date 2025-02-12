@@ -1,0 +1,111 @@
+.dialog-container {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+
+  /* display: none; */
+}
+
+dialog {
+  margin: auto;
+
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 95%;
+  max-width: 500px; /* Adjust as needed */
+  transition: transform 0.2s ease; /* Smooth scaling */
+
+  animation: modal-entrance 0.3s ease-in-out;
+}
+
+dialog:hover {
+  transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+@keyframes modal-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide down from the top */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal exit animation (applied via JavaScript) */
+dialog.closing {
+  animation: modal-exit 0.3s ease-in-out;
+}
+
+@keyframes modal-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide up */
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+}
+
+dialog h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal-content {
+  /* Style the content within the modal */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 20px;
+}
+
+.modal-buttons :nth-child(1) {
+  background-color: var(--poppy); /* Red */
+}
+.modal-buttons button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 10px; /* Space between buttons */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-buttons button:hover {
+  filter: saturate(120%); /* Slightly dim on hover */
+}
+
+/* Optional: Style the button that opens the modal */
+#openModalBtn {
+  background-color: #007bff; /* Blue */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#openModalBtn:hover {
+  background-color: #0069d9; /* Darker blue on hover */
+}

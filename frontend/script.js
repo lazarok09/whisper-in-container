@@ -78,36 +78,41 @@ function generateBlobUrlForTrack(base64Content) {
 }
 
 selectModel.addEventListener("change", (event) => {
-  switch (event.target.value) {
-    case "tiny":
-      alert(
-        "você selecionou o modelo minúsculo, que consome cerca de 1GB de VRAM"
-      );
-      break;
-    case "base":
-      alert(
-        "você selecionou o modelo padrão, que consome cerca de 1GB de VRAM"
-      );
-      break;
-    case "small":
-      alert(
-        "você selecionou o modelo pequeno, que consome cerca de 2GB de VRAM"
-      );
-      break;
-    case "medium":
-      alert("você selecionou o modelo médio, que consome cerca de 5GB de VRAM");
-      break;
-    case "large":
-      alert(
-        "você selecionou o modelo grande, que consome cerca de 10GB de VRAM"
-      );
-      break;
-  }
+  
+  const startMessage =
+    "You've selected the {{model}} model, which requires {{quantity}} of VRAM";
+
+  const replaceMessageWithModel = ({ startMessage }) => {
+    return startMessage.replace("{{model}}", event.target.value);
+  };
+
+  const replaceRequiredVRAMBasedOnModel = ({ finalMessage, model }) => {
+    const models = {
+      tiny: "1GB",
+      base: "1GB",
+      small: "2GB",
+      medium: "5GB",
+      large: "10GB",
+    };
+    return finalMessage.replace("{{quantity}}", models[model]);
+  };
+
+  const startMessageWithModel = replaceMessageWithModel({ startMessage });
+
+  const finalMessageModelAndRequiredVRAM = replaceRequiredVRAMBasedOnModel({
+    finalMessage: startMessageWithModel,
+    model: event.target.value,
+  });
+
+  document.getElementById("model-info").innerHTML =
+    finalMessageModelAndRequiredVRAM;
+  document.getElementById("myModal").showModal();
+    
 });
 
 uploadVideoInput.addEventListener("change", (event) => {
   if (event.target.files && event.target.files[0]) {
-    uploadVideoLabel.innerHTML = event.target.files[0].name ?? "Arquivo pronto";
+    uploadVideoLabel.innerHTML = event.target.files[0].name ?? "File ready";
     videoElement.src = URL.createObjectURL(event.target.files[0]);
   }
 });
@@ -118,7 +123,7 @@ demoButton.addEventListener("click", () => {
 
 function toggleWhisper() {
   const el = document.getElementById("showwhispercontainer");
-  const backBtn = document.getElementById("voltar");
+  const backBtn = document.getElementById("back__button");
   const mainGp = document.getElementById("maingroup");
 
   if (el.classList.contains("hideblock")) {

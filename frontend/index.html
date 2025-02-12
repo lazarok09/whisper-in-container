@@ -15,9 +15,24 @@
 
     <link href="./fonts.css" rel="stylesheet" type="text/css" />
     <link href="./style.css" rel="stylesheet" type="text/css" />
+    <link href="./modal.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
+    <!-- DIALOG AREA -->
+       <div class="dialog-container">
+         <dialog id="myModal">
+           <h2>Whisper requires a good hardware</h2>
+           <div class="modal-content">
+             <p id="model-info">Be aware that {{model}} model requires {{quantity}} of VRAM</p>
+             <p>The estimated time can be longer if the media is bigger than a couple of minutes, be aware.</p>
+           </div>
+           <div class="modal-buttons">
+            <button id="closeModalBtn">Close</button>
+            <button id="confirmModalBtn">Confirm</button>
+           </div>
+       </dialog>
+
     <main class="main">
       <!-- Step 1 - Introduction to the app  -->
       <div class="main__group" id="maingroup">
@@ -26,7 +41,7 @@
         </h1>
         <img
           src="./assets/twopeople.svg"
-          alt="duas pessoas andando"
+          alt="two people walking"
           height="350"
           width="350"
         />
@@ -40,10 +55,10 @@
 
       <button
         class="main__action-start hideblock"
-        id="voltar"
+        id="back__button"
         onclick="toggleWhisper()"
       >
-        Voltar
+        Back
       </button>
 
       <!-- Step 2 Hided Whisper handler -->
@@ -55,7 +70,7 @@
           </video>
         </div>
 
-        <section aria-label="Área do envio de video">
+        <section aria-label="Upload video area">
           <form
             name="generate-subtitle"
             id="upload-video-form"
@@ -90,7 +105,7 @@
             <div>
               <button
                 type="button"
-                aria-label="Clique para carregar o vídeo de demonstração"
+                aria-label="click to load demonstration video"
                 id="demo-button"
                 class="button button-red"
               >
@@ -103,7 +118,7 @@
                 required
                 name="models"
                 id="select-model"
-                title="selecione um modelo"
+                title="select a model"
               >
                 <option value="tiny">Tiny</option>
                 <option value="base" selected>Basic</option>
@@ -120,7 +135,7 @@
           <a id="downloadLink" class="invisible-link">
             Download subtitle
             <span class="download-icon"
-              ><img src="./assets/download.svg" alt="icone de baixar" /></span
+              ><img src="./assets/download.svg" alt="download icon" /></span
           ></a>
         </section>
 
@@ -130,7 +145,13 @@
           <p id="hidden-logs">log</p>
         </details>
       </div>
+
+      
+       </div>
+       
+
     </main>
+    <script src="./modal.js"></script>
     <script src="./script.js"></script>
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
