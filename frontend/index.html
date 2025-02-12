@@ -3,7 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Base64 VTT</title>
+      <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png"> 
+      <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png"> 
+      <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png"> 
+  </head>
+
+
+      <meta name="author" content="lazarok09">
+    <title>Whisper in Container</title>
 
     <link href="./fonts.css" rel="stylesheet" type="text/css" />
     <link href="./style.css" rel="stylesheet" type="text/css" />
@@ -14,7 +22,7 @@
       <!-- Step 1 - Introduction to the app  -->
       <div class="main__group" id="maingroup">
         <h1 class="main__title">
-          Start with the Whisper ML powered with Docker
+          Start with the Whisper, a machine learning model powered with Docker
         </h1>
         <img
           src="./assets/twopeople.svg"
@@ -23,13 +31,10 @@
           width="350"
         />
         <p class="main__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          mollitia, assumenda ducimus doloribus sunt cupiditate temporibus nisi
-          doloremque deserunt dolorem expedita natus nulla reprehenderit sit?
-          Reiciendis temporibus ducimus est alias!
+        For my diploma project, I decided to containerize and run an entire machine learning model as a proof of concept. This project also served as the basis for my post-graduate conclusion paper, which was successfully completed
         </p>
         <button class="main__action-start" onclick="toggleWhisper()">
-          Começar
+          Get started
         </button>
       </div>
 
@@ -63,7 +68,7 @@
               aria-labelledby="upload-video-label"
             >
               <label for="upload-video" id="upload-video-label"
-                >Enviar arquivo</label
+                >Upload video</label
               >
               <input
                 name="file"
@@ -78,7 +83,7 @@
 
             <div>
               <button id="submit" class="button button-yellow" type="submit">
-                Gerar legenda
+                Generate subtitles
               </button>
             </div>
 
@@ -89,7 +94,7 @@
                 id="demo-button"
                 class="button button-red"
               >
-                Video demo
+                Demo video
               </button>
             </div>
 
@@ -100,11 +105,11 @@
                 id="select-model"
                 title="selecione um modelo"
               >
-                <option value="tiny">Minúsculo</option>
-                <option value="base" selected>Básico</option>
-                <option value="small">Pequeno</option>
-                <option value="medium">Médio</option>
-                <option value="large">Grande</option>
+                <option value="tiny">Tiny</option>
+                <option value="base" selected>Basic</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
               </select>
             </div>
           </form>
@@ -113,7 +118,7 @@
         <!-- Download subtitle-->
         <section class="download-area">
           <a id="downloadLink" class="invisible-link">
-            Baixar legenda
+            Download subtitle
             <span class="download-icon"
               ><img src="./assets/download.svg" alt="icone de baixar" /></span
           ></a>
@@ -121,11 +126,14 @@
 
         <!-- Error and  Logs -->
         <details id="details-container" class="details">
-          <summary class="details details-title">Mostrar logs</summary>
-          <p id="hidden-logs">Logs aparecerão aqui !</p>
+          <summary class="details details-title">Show logs</summary>
+          <p id="hidden-logs">log</p>
         </details>
       </div>
     </main>
     <script src="./script.js"></script>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
   </body>
 </html>

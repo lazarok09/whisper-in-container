@@ -11,44 +11,65 @@
   --sunglow: #fdca40;
   --platnum: #e6e8e6;
 }
+
 body {
-  background: var(--platnum);
+  background: white;
   color: white;
   font-family: "Roboto", sans-serif;
 }
+
+.main__group {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 16px;
+  border-radius: 4px;
+  grid-gap: 1rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
 .main__title {
   font-size: 24px;
   font-family: Roboto, "sans-serif";
   color: var(--black);
+  text-align: center;
 }
+
 .main__description {
   font-size: 16px;
   color: var(--black);
   display: flex;
-  align-self: flex-end;
+  align-self: flex-end; /* Corrected: align-self instead of align */
+  text-align: center;
 }
-.main__action-start {
+
+.main__action-start,
+#voltar {
+  /* Combined styles for both buttons */
   background-color: var(--crayola);
   border: none;
   padding: 8px;
   color: white;
   border-radius: 4px;
+  font-size: 1rem;
   width: 100%;
   max-width: 8rem;
   cursor: pointer;
+  font-weight: bold;
 }
-.main__group {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
 
-  grid-gap: 1rem;
-}
 .showblock {
   display: block;
 }
+
 .hideblock {
   display: none;
+}
+
+#showwhispercontainer {
+  /* Styles for the container itself */
 }
 
 .video-container {
@@ -56,6 +77,7 @@ body {
   max-width: 751px;
   background: transparent;
 }
+
 .video-container video {
   width: 100%;
   aspect-ratio: 16/9;
@@ -69,12 +91,15 @@ body {
   background: transparent;
   margin-bottom: 32px;
 }
+
 .upload-video-form .upload-video #upload-video-label {
   overflow: hidden;
   text-indent: 6px;
   word-break: keep-all;
 }
+
 .upload-video-form .button {
+  /* Combined styles */
   height: 42px;
   width: 137px;
   color: white;
@@ -86,25 +111,28 @@ body {
 .upload-video-form .button.button-red {
   background: var(--poppy);
 }
+
 .upload-video-form .button.button-blue {
   background: var(--crayola);
 }
+
 .upload-video-form .button.button-yellow {
   background: var(--sunglow);
   font-weight: bold;
 }
+
 .upload-video-form .upload-video {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .upload-video-form .upload-video #audio {
   width: 200px;
 }
 
 .upload-video-form .hide-input {
   position: absolute;
-
   text-indent: -9999px;
 }
 
@@ -115,37 +143,6 @@ body {
   height: 42px;
   width: 137px;
   text-align: center;
-}
-
-.details-title:hover {
-  color: var(--sunglow);
-}
-.details-title {
-  cursor: pointer;
-}
-
-.details .details-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.details p#hidden-logs {
-  font-size: 14px;
-
-  border-radius: 2px;
-  padding: 16px;
-
-  font-family: "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--black); /* Red color for error messages */
-  background-color: #f5f5f5; /* Light gray background */
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  white-space: pre-wrap; /* Preserve line breaks */
-  word-wrap: break-word;
 }
 
 .download-area {
@@ -162,6 +159,7 @@ body {
   cursor: pointer;
   text-decoration: none;
 }
+
 .download-area .invisible-link:hover {
   color: red;
 }
@@ -170,25 +168,75 @@ body {
   padding: 0 16px;
 }
 
+.details,
+.details-title {
+  /* Combined styles */
+  cursor: pointer;
+}
+
+.details-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.details-title:hover {
+  color: var(--sunglow);
+}
+
+.details p#hidden-logs {
+  font-size: 14px;
+  border-radius: 2px;
+  padding: 16px;
+  font-family: "Courier New", monospace;
+  line-height: 1.4;
+  color: var(--black);
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 @media (min-width: 1080px) {
   .main {
     margin: 0 auto;
     width: 751px;
   }
+  .main__group {
+    border-radius: 8px;
+    padding: 32px;
+  }
+  .main__action-start,
+  #voltar {
+    /* Combined styles */
+    font-size: 1rem;
+  }
+
   .upload-video-form {
     justify-content: flex-start;
     gap: 35px;
   }
+
   .upload-video-form .button,
   .upload-video-form #select-model {
+    /* Combined styles */
     width: 227px;
     height: 57px;
     font-size: 18px;
   }
-  .upload-video-form #select-model {
-    font-size: 18px;
-  }
+
   .main__title {
     font-size: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .main__group {
+    /* Styles already in .main__group, no need to repeat */
+  }
+  .main__action-start,
+  #voltar {
+    /* Styles already in .main__action-start, no need to repeat */
   }
 }
