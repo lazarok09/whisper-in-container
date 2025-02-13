@@ -18,6 +18,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+button {
+  font-family: "Roboto", sans-serif;
+}
+
 .main__group {
   display: flex;
   flex-direction: column;
@@ -107,6 +111,9 @@ body {
 
 #showwhispercontainer {
   /* Styles for the container itself */
+  padding: 64px;
+  max-width: 751px;
+
 }
 
 .video-container {
