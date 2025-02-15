@@ -10,6 +10,8 @@
 </p>
 <br/>
 
+
+
 <div align="center"><img height=250 width=250 src="https://i.pinimg.com/originals/87/2a/57/872a57987284eb49af534b1cccb4ace3.gif" alt="animated gif" /></div>
 
 <hr/>
@@ -27,7 +29,7 @@ In order to get my postgraduate degree i choosed a funny thing to do, get in a c
 
 <br />
 
-<div align="center"><img src="https://i.imgur.com/LCAtS6O.png" alt="image containing a user interface to interact with whisper" /></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/6b1c605e-a451-43f9-87ae-7de3313cb5c3" alt="image containing a user interface to interact with whisper" /></div>
 
 
 <hr />
