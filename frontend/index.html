@@ -75,12 +75,20 @@
       <main class="flex flex-col items-center space-y-6">
         <div class="w-full bg-gray-900 p-4 rounded-lg terminal-border">
           <video
-            id="videoPlayer"
+            id="video"
             class="w-full rounded-lg border border-gray-700"
             controls
           >
             <source src="" type="video/mp4" />
             Seu navegador não suporta vídeos.
+            <track
+              id="caption-track"
+              kind="subtitles"
+              label="English"
+              srclang="en"
+              src=""
+              default
+            />
           </video>
         </div>
 
@@ -101,7 +109,6 @@
             <input
               name="file"
               for="submit"
-              required
               id="upload-video"
               type="file"
               accept="audio/*, video/*"
@@ -112,7 +119,7 @@
           <button
             id="generateCaptionBtn"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded btn-hover"
-            type="button"
+            type="submit"
           >
             Generate caption
           </button>
@@ -137,6 +144,23 @@
             <option value="large">Large</option>
           </select>
         </form>
+
+        <div
+          id="subtitle-container"
+          class="w-full bg-black p-4 rounded-lg border border-green-500 terminal-border max-h-48 overflow-auto text-green-400 text-sm"
+        >
+          <p id="subtitle-output" class="whitespace-pre-line">
+            Legenda aparecerá aqui...
+          </p>
+        </div>
+
+        <a
+          id="downloadSubtitleBtn"
+          type="button"
+          class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded btn-hover hidden display-none"
+        >
+          Download Subtitle
+        </a>
       </main>
     </div>
 

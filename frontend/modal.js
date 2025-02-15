@@ -1,7 +1,6 @@
 const modal = document.getElementById("myModal");
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
-const confirmModalBtn = document.getElementById("confirmModalBtn");
 
 if (modal) {
   closeModalBtn.addEventListener("click", () => {
@@ -15,19 +14,6 @@ if (modal) {
       { once: true }
     );
     modal.classList.add("closing"); // Add the class *after* adding the listener
-  });
-
-  confirmModalBtn.addEventListener("click", () => {
-    // Handle confirmation logic here (e.g., form submission)
-    modal.classList.add("closing");
-    modal.addEventListener(
-      "animationend",
-      () => {
-        modal.close();
-        modal.classList.remove("closing");
-      },
-      { once: true }
-    );
   });
 
   // Optional: Close the modal if the user clicks outside the modal content

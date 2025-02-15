@@ -1,14 +1,14 @@
 const formElement = document.getElementById("upload-video-form");
 const videoElement = document.getElementById("video");
-const videoElementTrack = document.getElementById("video-track");
+const videoElementTrack = document.getElementById("caption-track");
 
 const uploadVideoInput = document.getElementById("upload-video");
 const uploadVideoLabel = document.getElementById("upload-video-label");
 
 const generateCaptionButton = document.getElementById("generateCaptionBtn");
 
-const hiddenLogs = document.getElementById("hidden-logs");
-const detailsContainer = document.getElementById("details-container");
+const hiddenLogs = document.getElementById("subtitle-output");
+const downloadLink = document.getElementById("downloadSubtitleBtn");
 
 const selectModel = document.getElementById("select-model");
 const demoButton = document.getElementById("demo-button");
@@ -20,6 +20,7 @@ formElement.addEventListener("submit", async (event) => {
   try {
     event.preventDefault();
     const form = new FormData(event.target);
+
     form.append("model", form.get("models"));
 
     const options = {
@@ -31,23 +32,37 @@ formElement.addEventListener("submit", async (event) => {
     selectModel.disabled = true;
     generateCaptionButton.innerHTML = "Carregando...";
 
+    uploadVideoLabel.classList.add("pointer-events-none");
+
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
 
     if (response.ok) {
-      hiddenLogs.innerHTML = "Sucesso:\n" + JSON.stringify(data, null, 2);
+      setSubtitleMessage(data);
       createDownloadSubtitleButton(data.base64_content);
       setVideoTrack(data.base64_content);
     }
   } catch (e) {
-    hiddenLogs.innerHTML = "Erro: " + e.message;
+    setSubtitleMessage(e.message);
   } finally {
-    detailsContainer.open = true;
-    generateCaptionButton.innerHTML = "Enviar";
+    generateCaptionButton.innerHTML = "Generate caption";
     generateCaptionButton.disabled = false;
     selectModel.disabled = false;
+    uploadVideoLabel.classList.remove("pointer-events-none");
   }
 });
+
+function setSubtitleMessage(messageToParse) {
+  try {
+    hiddenLogs.innerHTML = JSON.stringify(messageToParse, null, 2).replaceAll(
+      '"',
+      " "
+    );
+  } catch (e) {
+    hiddenLogs.innerHTML = "Unecpected error";
+  }
+}
+
 function base64ToWebVTT(base64Data) {
   const decodedText = atob(base64Data);
 
@@ -60,7 +75,7 @@ function base64ToWebVTT(base64Data) {
 
 function createDownloadSubtitleButton(base64Content) {
   const fileName = "subtitle.vtt";
-  const downloadLink = document.getElementById("downloadLink");
+
   // Create and tridownloadLinkgger download anchor
   downloadLink.style.display = "block";
 
@@ -70,6 +85,16 @@ function createDownloadSubtitleButton(base64Content) {
 function setVideoTrack(base64Content) {
   // Set track subtitle with the blob generated
   videoElementTrack.src = generateBlobUrlForTrack(base64Content);
+}
+function setVideoSRC(url) {
+  // Set track subtitle with the blob generated
+  videoElement.src = url;
+}
+
+function transformDemoURLToFile(url) {
+  return fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => new File([blob], "video.mp4", { type: blob.type }));
 }
 
 function generateBlobUrlForTrack(base64Content) {
@@ -116,24 +141,18 @@ uploadVideoInput.addEventListener("change", (event) => {
 });
 
 demoButton.addEventListener("click", () => {
-  videoElement.src = DEMO_URL;
+  setVideoSRC(DEMO_URL);
+
+  transformDemoURLToFile(DEMO_URL).then((file) => {
+    const dataTransfer = new DataTransfer();
+
+    const newFile = new File([file], "demo.mp4", {
+      type: file.type, // mantém o tipo original
+      lastModified: file.lastModified, // Preserva a data original, se necessário
+    });
+
+    dataTransfer.items.add(newFile);
+
+    uploadVideoInput.files = dataTransfer.files;
+  });
 });
-
-function toggleWhisper() {
-  const el = document.getElementById("showwhispercontainer");
-  const backBtn = document.getElementById("back__button");
-  const mainGp = document.getElementById("maingroup");
-
-  if (el.classList.contains("hideblock")) {
-    el.classList.add("showblock");
-    mainGp.classList.add("hideblock");
-    backBtn.classList.remove("hideblock");
-    el.classList.remove("hideblock");
-  } else {
-    el.classList.remove("showblock");
-    backBtn.classList.add("hideblock");
-    mainGp.classList.remove("hideblock");
-
-    el.classList.add("hideblock");
-  }
-}
