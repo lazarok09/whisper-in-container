@@ -5,7 +5,7 @@ const videoElementTrack = document.getElementById("video-track");
 const uploadVideoInput = document.getElementById("upload-video");
 const uploadVideoLabel = document.getElementById("upload-video-label");
 
-const submitAudioButton = document.getElementById("submit");
+const generateCaptionButton = document.getElementById("generateCaptionBtn");
 
 const hiddenLogs = document.getElementById("hidden-logs");
 const detailsContainer = document.getElementById("details-container");
@@ -27,9 +27,9 @@ formElement.addEventListener("submit", async (event) => {
       body: form,
     };
 
-    submitAudioButton.disabled = true;
+    generateCaptionButton.disabled = true;
     selectModel.disabled = true;
-    submitAudioButton.innerHTML = "Carregando...";
+    generateCaptionButton.innerHTML = "Carregando...";
 
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
@@ -43,8 +43,8 @@ formElement.addEventListener("submit", async (event) => {
     hiddenLogs.innerHTML = "Erro: " + e.message;
   } finally {
     detailsContainer.open = true;
-    submitAudioButton.innerHTML = "Enviar";
-    submitAudioButton.disabled = false;
+    generateCaptionButton.innerHTML = "Enviar";
+    generateCaptionButton.disabled = false;
     selectModel.disabled = false;
   }
 });
@@ -78,7 +78,6 @@ function generateBlobUrlForTrack(base64Content) {
 }
 
 selectModel.addEventListener("change", (event) => {
-  
   const startMessage =
     "You've selected the {{model}} model, which requires {{quantity}} of VRAM";
 
@@ -107,7 +106,6 @@ selectModel.addEventListener("change", (event) => {
   document.getElementById("model-info").innerHTML =
     finalMessageModelAndRequiredVRAM;
   document.getElementById("myModal").showModal();
-    
 });
 
 uploadVideoInput.addEventListener("change", (event) => {

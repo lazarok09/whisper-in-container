@@ -1,165 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
-      <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png"> 
-      <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png"> 
-      <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png"> 
-  </head>
+    <title>Whisper DevOps UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-
-      <meta name="author" content="lazarok09">
-    <title>Whisper in Container</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/apple-touch-icon.png"
+    />
 
     <link href="./fonts.css" rel="stylesheet" type="text/css" />
     <link href="./style.css" rel="stylesheet" type="text/css" />
     <link href="./modal.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+        font-family: "Courier New", monospace;
+      }
+      .terminal-border {
+        border: 2px solid #00ff00;
+        box-shadow: 0 0 10px #00ff00;
+      }
+      .btn-hover:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease-in-out;
+      }
+    </style>
   </head>
-
-  <body>
+  <body
+    class="text-white font-mono flex justify-center items-center min-h-screen"
+  >
     <!-- DIALOG AREA -->
-       <div class="dialog-container">
-         <dialog id="myModal">
-           <h2>Whisper requires a good hardware</h2>
-           <div class="modal-content">
-             <p id="model-info">Be aware that {{model}} model requires {{quantity}} of VRAM</p>
-             <p>The estimated time can be longer if the media is bigger than a couple of minutes, be aware.</p>
-           </div>
-           <div class="modal-buttons">
-            <button id="closeModalBtn">Close</button>
-            <button id="confirmModalBtn">Confirm</button>
-           </div>
-       </dialog>
-
-    <main class="main">
-      <!-- Step 1 - Introduction to the app  -->
-      <div class="main__group" id="maingroup">
-        <h1 class="main__title">
-          Start with the Whisper, a machine learning model powered with Docker
-        </h1>
-        <div
-        class="main__image-container"
-        >
-          <img
-            class="main__image"	
-            src="./assets/twopeople.svg"
-            alt="two people walking"
-            
-        />
+    <div class="dialog-container p-2">
+      <dialog id="myModal">
+        <div class="modal-content">
+          <h2 class="text-2xl font-bold">Whisper requires a good hardware</h2>
+          <p id="model-info">
+            Be aware that {{model}} model requires {{quantity}} of VRAM.
+          </p>
+          <div class="modal-buttons">
+            <button id="closeModalBtn" type="button">Close</button>
+          </div>
         </div>
-        
-        <p class="main__description">
-        For my diploma project, I decided to containerize and run an entire machine learning model as a proof of concept. This project also served as the basis for my post-graduate conclusion paper, which was successfully completed
+      </dialog>
+    </div>
+    <!-- END DIALOG-->
+
+    <div
+      class="container mx-auto p-6 max-w-4xl bg-black rounded-lg shadow-lg border border-green-500"
+    >
+      <header class="text-center py-6">
+        <h1 class="text-4xl font-bold text-green-400">Whisper in Container</h1>
+        <p class="text-gray-400">
+          Automatic transcription and subtitles generator
         </p>
-        <button class="main__action-start" onclick="toggleWhisper()">
-          Get started
-        </button>
-      </div>
+      </header>
 
-      <button
-        class="main__action-start hideblock"
-        id="back__button"
-        onclick="toggleWhisper()"
-      >
-        Back
-      </button>
-
-      <!-- Step 2 Hided Whisper handler -->
-      <div id="showwhispercontainer" class="hideblock">
-        <div class="video-container">
-          <video id="video" crossorigin="anonymous" loop controls>
+      <main class="flex flex-col items-center space-y-6">
+        <div class="w-full bg-gray-900 p-4 rounded-lg terminal-border">
+          <video
+            id="videoPlayer"
+            class="w-full rounded-lg border border-gray-700"
+            controls
+          >
             <source src="" type="video/mp4" />
-            <track id="video-track" srclang="en" label="Nightmare" default />
+            Seu navegador não suporta vídeos.
           </video>
         </div>
 
-        <section aria-label="Upload video area">
-          <form
-            name="generate-subtitle"
-            id="upload-video-form"
-            class="upload-video-form"
-            method="post"
-            enctype="multipart/form-data"
+        <form
+          name="generate-subtitle"
+          id="upload-video-form"
+          class="flex flex-wrap sm:justify-center sm:space-x-4 sm:mt-4 upload-video-form justify-between gap-2"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn-hover cursor-pointer"
+            aria-labelledby="upload-video-label"
           >
-            <div
-              class="upload-video button button-blue"
-              aria-labelledby="upload-video-label"
+            <label for="upload-video" id="upload-video-label" role="button"
+              >Upload video</label
             >
-              <label for="upload-video" id="upload-video-label"
-                >Upload video</label
-              >
-              <input
-                name="file"
-                for="submit"
-                required
-                id="upload-video"
-                type="file"
-                accept="audio/*, video/*"
-                class="hide-input"
-              />
-            </div>
+            <input
+              name="file"
+              for="submit"
+              required
+              id="upload-video"
+              type="file"
+              accept="audio/*, video/*"
+              class="hidden"
+            />
+          </div>
 
-            <div>
-              <button id="submit" class="button button-yellow" type="submit">
-                Generate subtitles
-              </button>
-            </div>
+          <button
+            id="generateCaptionBtn"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded btn-hover"
+            type="button"
+          >
+            Generate caption
+          </button>
+          <button
+            id="demo-button"
+            class="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded btn-hover"
+            type="button"
+          >
+            Vídeo Demo
+          </button>
+          <select
+            id="select-model"
+            class="bg-black border border-gray-700 text-white font-bold py-2 px-4 rounded"
+            required
+            name="models"
+            title="select a model"
+          >
+            <option value="tiny">Tiny</option>
+            <option value="base" selected>Basic</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </form>
+      </main>
+    </div>
 
-            <div>
-              <button
-                type="button"
-                aria-label="click to load demonstration video"
-                id="demo-button"
-                class="button button-red"
-              >
-                Demo video
-              </button>
-            </div>
-
-            <div>
-              <select
-                required
-                name="models"
-                id="select-model"
-                title="select a model"
-              >
-                <option value="tiny">Tiny</option>
-                <option value="base" selected>Basic</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-              </select>
-            </div>
-          </form>
-        </section>
-
-        <!-- Download subtitle-->
-        <section class="download-area">
-          <a id="downloadLink" class="invisible-link">
-            Download subtitle
-            <span class="download-icon"
-              ><img src="./assets/download.svg" alt="download icon" /></span
-          ></a>
-        </section>
-
-        <!-- Error and  Logs -->
-        <details id="details-container" class="details">
-          <summary class="details details-title">Show logs</summary>
-          <p id="hidden-logs">log</p>
-        </details>
-      </div>
-
-      
-       </div>
-       
-
-    </main>
     <script src="./modal.js"></script>
     <script src="./script.js"></script>
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-</style>
   </body>
 </html>

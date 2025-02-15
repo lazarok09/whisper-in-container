@@ -62,6 +62,10 @@ dialog h2 {
 
 .modal-content {
   /* Style the content within the modal */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .modal-buttons {
