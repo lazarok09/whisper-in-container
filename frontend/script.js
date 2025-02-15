@@ -30,7 +30,7 @@ formElement.addEventListener("submit", async (event) => {
 
     generateCaptionButton.disabled = true;
     selectModel.disabled = true;
-    generateCaptionButton.innerHTML = "Carregando...";
+    generateCaptionButton.innerHTML = "Loading...";
 
     uploadVideoLabel.classList.add("pointer-events-none");
 
